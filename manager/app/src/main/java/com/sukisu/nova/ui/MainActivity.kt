@@ -469,11 +469,9 @@ class MainActivity : ComponentActivity() {
                                     }
                                 }
                                 entry<Route.FolkPatchSettings>(swipeDismiss = swipeDismiss) { key ->
-                                    MaterialExpressivePalette {
-                                        com.sukisu.nova.folkpatch.ui.FolkPatchUnifiedSettingsScreen(
-                                            initialCategory = key.initialCategory,
-                                        )
-                                    }
+                                    com.sukisu.nova.folkpatch.ui.FolkPatchUnifiedSettingsScreen(
+                                        initialCategory = key.initialCategory,
+                                    )
                                 }
                         }
                     }

@@ -744,44 +744,6 @@ fun SettingPagerMiuix(
 
                     AppCard(
                         modifier = Modifier
-                            .padding(top = 12.dp)
-                            .fillMaxWidth(),
-                        colors = backgroundAwareCardColors(),
-                    ) {
-                        ArrowPreference(
-                            title = stringResource(R.string.kitsune_unified_settings_title),
-                            summary = stringResource(R.string.kitsune_unified_settings_subtitle),
-                            startAction = {
-                                Icon(
-                                    Icons.Rounded.Tune,
-                                    modifier = Modifier.padding(end = 6.dp),
-                                    contentDescription = null,
-                                    tint = colorScheme.onBackground,
-                                )
-                            },
-                            onClick = {
-                                kitsuneNav.push(com.sukisu.nova.ui.navigation3.Route.FolkPatchSettings())
-                            },
-                        )
-                        ArrowPreference(
-                            title = stringResource(R.string.kitsune_folkpatch_boot_title),
-                            summary = stringResource(R.string.kitsune_fp_banner_subtitle),
-                            startAction = {
-                                Icon(
-                                    Icons.Rounded.Build,
-                                    modifier = Modifier.padding(end = 6.dp),
-                                    contentDescription = null,
-                                    tint = colorScheme.onBackground,
-                                )
-                            },
-                            onClick = {
-                                kitsuneNav.push(com.sukisu.nova.ui.navigation3.Route.FolkPatchBootInstall(0))
-                            },
-                        )
-                    }
-
-                    AppCard(
-                        modifier = Modifier
                             .bringIntoViewRequester(requester(SettingsSection.DIAGNOSTICS))
                             .padding(vertical = 12.dp)
                             .fillMaxWidth(),
@@ -816,6 +778,29 @@ fun SettingPagerMiuix(
                                 )
                             },
                             onClick = actions.onOpenAbout,
+                        )
+                    }
+
+                    AppCard(
+                        modifier = Modifier
+                            .padding(bottom = 12.dp)
+                            .fillMaxWidth(),
+                        colors = backgroundAwareCardColors(),
+                    ) {
+                        ArrowPreference(
+                            title = stringResource(R.string.kitsune_unified_settings_title),
+                            summary = stringResource(R.string.kitsune_unified_settings_subtitle),
+                            startAction = {
+                                Icon(
+                                    Icons.Rounded.Tune,
+                                    modifier = Modifier.padding(end = 6.dp),
+                                    contentDescription = null,
+                                    tint = colorScheme.onBackground,
+                                )
+                            },
+                            onClick = {
+                                kitsuneNav.push(com.sukisu.nova.ui.navigation3.Route.FolkPatchSettings())
+                            },
                         )
                     }
                     Spacer(Modifier.height(bottomInnerPadding))

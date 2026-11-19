@@ -69,8 +69,11 @@
     <string name="kitsune_conflict_folkpatch_active_desc">Не прошивайте Kitsune в init_boot поверх активного Kitsunepatch в boot. Сначала выполните «Удалить патч» во вкладке Kitsunepatch.</string>
 
     <!-- Объединённые настройки -->
-    <string name="kitsune_unified_settings_title">Настройки Kitsunepatch</string>
-    <string name="kitsune_unified_settings_subtitle">SuperKey, Liquid Glass, PathHide, звуки запуска и бэкап</string>
+    <string name="kitsune_unified_settings_title">Настройки KitsuneSU</string>
+    <string name="kitsune_unified_settings_subtitle">SuperKey, патчер boot.img, PathHide, NetIsolate и параметры ядра</string>
+    <string name="kitsune_sec_superkey">SuperKey и авторизация</string>
+    <string name="kitsune_sec_boot_patcher">Установка и патчинг boot.img</string>
+    <string name="kitsune_sec_kp_features">Функции ядра KernelPatch</string>
     <string name="kitsune_settings_install_sukisu_title">Установка Kitsune (init_boot)</string>
     <string name="kitsune_settings_install_sukisu_desc">Патч и прошивка init_boot (LKM / GKI / AnyKernel3)</string>
     <string name="kitsune_settings_icons_title">Логотип и иконка (8 вариантов)</string>

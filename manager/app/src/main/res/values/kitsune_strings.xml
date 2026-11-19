@@ -69,8 +69,11 @@
     <string name="kitsune_conflict_folkpatch_active_desc">Do not flash Kitsune to init_boot while Kitsunepatch is active in boot. Unpatch boot first to prevent conflict.</string>
 
     <!-- Unified Settings -->
-    <string name="kitsune_unified_settings_title">Kitsunepatch Settings</string>
-    <string name="kitsune_unified_settings_subtitle">SuperKey, Liquid Glass, PathHide, startup sounds and backup</string>
+    <string name="kitsune_unified_settings_title">KitsuneSU Settings</string>
+    <string name="kitsune_unified_settings_subtitle">SuperKey, boot.img patcher, PathHide, NetIsolate and kernel parameters</string>
+    <string name="kitsune_sec_superkey">SuperKey &amp; Authorization</string>
+    <string name="kitsune_sec_boot_patcher">Installation &amp; boot.img Patching</string>
+    <string name="kitsune_sec_kp_features">KernelPatch Features</string>
     <string name="kitsune_settings_install_sukisu_title">Install Kitsune (init_boot)</string>
     <string name="kitsune_settings_install_sukisu_desc">Patch or flash init_boot (LKM / GKI / AnyKernel3)</string>
     <string name="kitsune_settings_icons_title">App Icon &amp; Logos (8 built-in)</string>

@@ -577,28 +577,6 @@ fun SettingPagerMaterial(
                 }
             }
 
-            SegmentedColumn(
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 13.dp),
-                content = listOf(
-                    {
-                        SegmentedListItem(
-                            onClick = { kitsuneNav.push(com.sukisu.nova.ui.navigation3.Route.FolkPatchSettings()) },
-                            headlineContent = { Text(stringResource(R.string.kitsune_unified_settings_title)) },
-                            supportingContent = { Text(stringResource(R.string.kitsune_unified_settings_subtitle)) },
-                            leadingContent = { IconTile(Icons.Rounded.Tune, stringResource(R.string.kitsune_unified_settings_title)) },
-                        )
-                    },
-                    {
-                        SegmentedListItem(
-                            onClick = { kitsuneNav.push(com.sukisu.nova.ui.navigation3.Route.FolkPatchBootInstall(0)) },
-                            headlineContent = { Text(stringResource(R.string.kitsune_folkpatch_boot_title)) },
-                            supportingContent = { Text(stringResource(R.string.kitsune_fp_banner_subtitle)) },
-                            leadingContent = { IconTile(Icons.Rounded.Build, stringResource(R.string.kitsune_folkpatch_boot_title)) },
-                        )
-                    },
-                ),
-            )
-
             SettingsAnchor(SettingsSection.DIAGNOSTICS, anchorRequesters) {
             SegmentedColumn(
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 13.dp),
@@ -631,6 +609,26 @@ fun SettingPagerMaterial(
                 )
             )
             }
+
+            SegmentedColumn(
+                modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 13.dp),
+                content = listOf(
+                    {
+                        SegmentedListItem(
+                            onClick = { kitsuneNav.push(com.sukisu.nova.ui.navigation3.Route.FolkPatchSettings()) },
+                            headlineContent = { Text(stringResource(R.string.kitsune_unified_settings_title)) },
+                            supportingContent = { Text(stringResource(R.string.kitsune_unified_settings_subtitle)) },
+                            leadingContent = { IconTile(Icons.Rounded.Tune, stringResource(R.string.kitsune_unified_settings_title)) },
+                            trailingContent = {
+                                Icon(
+                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    null
+                                )
+                            }
+                        )
+                    }
+                ),
+            )
 
             Spacer(modifier = Modifier.height(8.dp))
 

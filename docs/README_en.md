@@ -46,3 +46,4 @@ A unified kernel-based root solution for Android combining **Kitsune** (`init_bo
 
 ## 📜 License
 KitsuneSU is licensed under [GPL-3.0 or later](LICENSE).
+
