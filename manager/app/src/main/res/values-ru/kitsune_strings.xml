@@ -187,26 +187,15 @@
     <string name="kitsune_kp_saved_inactive">SuperKey сохранён (KernelPatch сейчас не активен)</string>
     <string name="kitsune_kp_cleared">SuperKey очищен</string>
 
-    <!-- Безопасное скрытие от Play Integrity -->
-    <string name="kitsune_pi_title">Скрытие от Play Integrity (безопасно)</string>
-    <string name="kitsune_pi_desc">Работает только в RAM (Umount, Mount/SELinux Hide, исключение GMS и Verified Boot в памяти). Без риска бутлупа и брика.</string>
-    <string name="kitsune_pi_applied">Скрытие Play Integrity активно: %1$s</string>
-    <string name="kitsune_pi_saved_no_root">Сохранено! Применится автоматически после установки рута.</string>
-    <string name="kitsune_pi_disabled">Скрытие Play Integrity отключено</string>
+    <!-- Встроенная аппаратная защита от бутлупа -->
+    <string name="kitsune_bootloop_guard_title">Встроенная защита от бутлупа</string>
+    <string name="kitsune_bootloop_guard_desc">Аппаратный сторожевой таймер и счетчик ранней загрузки (post-fs-data). Автоматически выявляет сбои и отключает неисправный модуль до старта системы.</string>
+    <string name="kitsune_bootloop_guard_enabled">Защита от бутлупа включена</string>
+    <string name="kitsune_bootloop_guard_disabled">Защита от бутлупа отключена</string>
+    <string name="kitsune_bootloop_rescued_title">⚠️ Предотвращён бутлуп!</string>
+    <string name="kitsune_bootloop_rescued_message">Модуль «%1$s» вызывал сбой при загрузке системы и был автоматически отключён встроенной защитой Kitsune Bootloop Guard. Ваша система успешно спасена.</string>
+    <string name="kitsune_bootloop_rescued_all_message">Обнаружен критический сбой при загрузке системы. Все модули были временно отключены встроенной защитой Kitsune Bootloop Guard для восстановления работы устройства.</string>
     <string name="kitsune_home_patch_boot">Патч boot</string>
-
-    <!-- Обновление KitsuneSU 3.1 & Kitsune Shield -->
-    <string name="kitsune_card_update_title">KitsuneSU v3.1.0 (Fox Edition)</string>
-    <string name="kitsune_card_update_subtitle">Kitsune Shield &amp; Play Integrity Express</string>
-    <string name="kitsune_card_update_desc">Актуальная версия. RAM-антидетект загрузчика, защита от проверок Play Integrity и встроенный Kitsunepatch.</string>
-    <string name="kitsune_btn_pi_express">Очистить кэш GMS</string>
-    <string name="kitsune_btn_changelog">Что нового</string>
-    <string name="kitsune_dlg_changelog_title">Обновление KitsuneSU v3.1.0</string>
-    <string name="kitsune_dlg_changelog_content"><![CDATA[<b>Что нового в KitsuneSU 3.1.0:</b><br><br>• <b>Полный ребрендинг:</b> удалены все упоминания сторонних утилит, теперь весь интерфейс полностью в едином стиле KitsuneSU на русском языке.<br><br>• <b>Настройки Kitsunepatch:</b> выделенное меню для параметров KernelPatch 0.13.9, SuperKey, PathHide и KPM-модулей.<br><br>• <b>Kitsune Shield (Play Integrity Express):</b> очистка кэша Google Play Services в 1 клик и сброс флагов загрузчика в RAM без риска бутлупа.<br><br>• <b>Статический ksuinit (16KB):</b> надёжный запуск на Android 14/15/16 с поддержкой страниц памяти 16 КБ.<br><br>• <b>Чистый интерфейс:</b> удалены ссылки пожертвований и сторонние баннеры обновлений.]]></string>
-    <string name="kitsune_pi_cleaning">Очистка кэша Play Services и RAM-спуфинг…</string>
-    <string name="kitsune_pi_clean_success">Готово! Кэш Play Services очищен, флаги в RAM подменены (зелёный Verified Boot).</string>
-    <string name="kitsune_pi_clean_notice_title">Статус Play Integrity</string>
-    <string name="kitsune_pi_clean_notice_msg"><![CDATA[✅ <b>Антидетект применён:</b><br>• Кэш GMS DroidGuard очищен<br>• Флаги bootloader в RAM сброшены в green/locked<br>• Пространства монтирования изолированы<br><br>💡 <i>Обратите внимание:</i> для прохождения <b>DEVICE</b> и <b>STRONG INTEGRITY</b> (аппаратный Keymaster) требуется модуль с актуальным ключом Keybox (например, <b>PlayIntegrityFork</b> или <b>TrickyStore</b> во вкладке Модули).]]></string>
 
     <!-- Динамический менеджер (русский перевод) -->
     <string name="dynamic_manager_title">Динамические менеджеры</string>
@@ -214,20 +203,4 @@
     <string name="dynamic_manager_enabled">Динамические менеджеры включены</string>
     <string name="dynamic_manager_add">Добавить менеджер</string>
     <string name="dynamic_manager_remove">Удалить менеджер</string>
-    <!-- Скрытие от банковских приложений (без перезагрузки) -->
-    <string name="kitsune_bank_hide_title">Скрытие от банковских приложений</string>
-    <string name="kitsune_bank_hide_subtitle">Скрытие root и загрузчика без перезагрузки</string>
-    <string name="kitsune_bank_hide_card_title">Защита от детекта root и загрузчика</string>
-    <string name="kitsune_bank_hide_card_desc">Изолирует пространство монтирования (Umount), скрывает бинарники su и подменяет статус загрузчика в RAM (green/locked) без перезагрузки телефона.</string>
-    <string name="kitsune_bank_hide_btn_all">Скрыть от всех банков</string>
-    <string name="kitsune_bank_hide_filter_all">Все приложения</string>
-    <string name="kitsune_bank_hide_filter_banks">Банки и детекторы</string>
-    <string name="kitsune_bank_hide_filter_hidden">Скрытые</string>
-    <string name="kitsune_bank_hide_search">Поиск банков и приложений…</string>
-    <string name="kitsune_bank_hide_toast_applied">Рут и загрузчик скрыты от «%1$s» без перезагрузки!</string>
-    <string name="kitsune_bank_hide_toast_reverted">Скрытие отключено для «%1$s»</string>
-    <string name="kitsune_bank_hide_toast_all">Рут и загрузчик скрыты от %1$d банковских приложений!</string>
-    <string name="kitsune_bank_badge">Банк</string>
-    <string name="kitsune_bank_protected_count">Защищено банков: %1$d</string>
-    <string name="kitsune_bank_none_protected">Нажмите для выбора банков</string>
 </resources>

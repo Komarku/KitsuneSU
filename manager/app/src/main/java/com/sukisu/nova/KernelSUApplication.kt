@@ -80,9 +80,6 @@ class KernelSUApplication : Application(), ViewModelStoreOwner {
         super.onCreate()
         ksuApp = this
         com.sukisu.nova.folkpatch.FolkPatchPrefs.init(this)
-        launcherRestoreScope.launch {
-            com.sukisu.nova.folkpatch.SafePlayIntegrityGuard.applyOnStartupIfEnabled(this@KernelSUApplication)
-        }
         if (AiFeatureBridge.isAvailable) AiFeatureBridge.install(ManagerAiHost(this))
 
         if (!isUserUnlocked()) {

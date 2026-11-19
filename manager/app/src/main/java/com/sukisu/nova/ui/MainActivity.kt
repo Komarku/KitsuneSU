@@ -23,6 +23,7 @@ import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import com.sukisu.nova.ui.component.splash.SplashScreen
 import com.sukisu.nova.ui.theme.LocalAppBackgroundBackdrop
 import com.sukisu.nova.ui.theme.LocalAppSettings
@@ -188,7 +189,7 @@ class MainActivity : ComponentActivity() {
         com.sukisu.nova.folkpatch.FolkPatchPrefs.init(this)
         com.sukisu.nova.folkpatch.FolkPatchSoundPlayer.playStartupIfEnabled(this)
         lifecycleScope.launch(Dispatchers.IO) {
-            com.sukisu.nova.folkpatch.KitsuneBankHideManager.applyAllOnStartup(this@MainActivity)
+            com.sukisu.nova.folkpatch.KitsuneBootloopGuard.installOrUpdateGuard()
         }
         if (ThemeTrialManager.isActive(this)) {
             ViewModelProvider(this)[SettingsViewModel::class.java]
@@ -478,9 +479,6 @@ class MainActivity : ComponentActivity() {
                                         initialCategory = key.initialCategory,
                                     )
                                 }
-                                entry<Route.BankHide>(swipeDismiss = swipeDismiss) {
-                                    com.sukisu.nova.folkpatch.ui.KitsuneBankHideScreen()
-                                }
                         }
                     }
 
@@ -566,6 +564,30 @@ class MainActivity : ComponentActivity() {
                             SplashScreen(
                                 isReady = appContentReady,
                                 onDismissed = { splashDismissed = true }
+                            )
+                        }
+
+                        var rescueIncident by remember { mutableStateOf<com.sukisu.nova.folkpatch.KitsuneBootloopGuard.RescueIncident?>(null) }
+                        LaunchedEffect(Unit) {
+                            rescueIncident = com.sukisu.nova.folkpatch.KitsuneBootloopGuard.checkAndConsumeRescueIncident()
+                        }
+                        if (rescueIncident != null) {
+                            val incident = rescueIncident!!
+                            val rescueTitle = stringResource(R.string.kitsune_bootloop_rescued_title)
+                            val rescueMsg = if (incident.moduleId == "ALL_MODULES") {
+                                stringResource(R.string.kitsune_bootloop_rescued_all_message)
+                            } else {
+                                stringResource(R.string.kitsune_bootloop_rescued_message, incident.moduleId)
+                            }
+                            androidx.compose.material3.AlertDialog(
+                                onDismissRequest = { rescueIncident = null },
+                                title = { androidx.compose.material3.Text(rescueTitle) },
+                                text = { androidx.compose.material3.Text(rescueMsg) },
+                                confirmButton = {
+                                    androidx.compose.material3.TextButton(onClick = { rescueIncident = null }) {
+                                        androidx.compose.material3.Text(stringResource(android.R.string.ok))
+                                    }
+                                }
                             )
                         }
                     }

@@ -216,7 +216,7 @@ fun SettingPagerMiuix(
                     val kitsuneNav = com.sukisu.nova.ui.navigation3.LocalNavigator.current
                     val kitsuneCtx = androidx.compose.ui.platform.LocalContext.current
                     val kitsuneScope = androidx.compose.runtime.rememberCoroutineScope()
-                    var piHideEnabled by remember { mutableStateOf(com.sukisu.nova.folkpatch.SafePlayIntegrityGuard.isEnabled(kitsuneCtx)) }
+                    var bootloopGuardEnabled by remember { mutableStateOf(com.sukisu.nova.folkpatch.KitsuneBootloopGuard.isEnabled(kitsuneCtx)) }
                     AppCard(
                         modifier = Modifier
                             .bringIntoViewRequester(requester(SettingsSection.GENERAL))
@@ -383,27 +383,27 @@ fun SettingPagerMiuix(
                             colors = backgroundAwareCardColors(),
                         ) {
                             SwitchPreference(
-                                title = stringResource(R.string.kitsune_pi_title),
-                                summary = stringResource(R.string.kitsune_pi_desc),
+                                title = stringResource(R.string.kitsune_bootloop_guard_title),
+                                summary = stringResource(R.string.kitsune_bootloop_guard_desc),
                                 startAction = {
                                     Icon(
-                                        Icons.Rounded.VerifiedUser,
+                                        Icons.Rounded.Security,
                                         modifier = Modifier.padding(end = 6.dp),
                                         contentDescription = null,
                                         tint = colorScheme.onBackground,
                                     )
                                 },
-                                checked = piHideEnabled,
+                                checked = bootloopGuardEnabled,
                                 onCheckedChange = { enabled ->
-                                    piHideEnabled = enabled
+                                    bootloopGuardEnabled = enabled
                                     kitsuneScope.launch {
-                                        val res = com.sukisu.nova.folkpatch.SafePlayIntegrityGuard.setEnabled(kitsuneCtx, enabled)
-                                        val msg = when {
-                                            !enabled -> kitsuneCtx.getString(R.string.kitsune_pi_disabled)
-                                            res.appliedLayers.isNotEmpty() -> kitsuneCtx.getString(R.string.kitsune_pi_applied, res.appliedLayers.joinToString(", "))
-                                            else -> kitsuneCtx.getString(R.string.kitsune_pi_saved_no_root)
+                                        com.sukisu.nova.folkpatch.KitsuneBootloopGuard.setEnabled(kitsuneCtx, enabled)
+                                        val msg = if (enabled) {
+                                            kitsuneCtx.getString(R.string.kitsune_bootloop_guard_enabled)
+                                        } else {
+                                            kitsuneCtx.getString(R.string.kitsune_bootloop_guard_disabled)
                                         }
-                                        android.widget.Toast.makeText(kitsuneCtx, msg, android.widget.Toast.LENGTH_LONG).show()
+                                        android.widget.Toast.makeText(kitsuneCtx, msg, android.widget.Toast.LENGTH_SHORT).show()
                                     }
                                 },
                             )

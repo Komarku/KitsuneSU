@@ -42,7 +42,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.LaunchedEffect
 import kotlinx.coroutines.launch
 import android.widget.Toast
-import com.sukisu.nova.folkpatch.SafePlayIntegrityGuard
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -208,9 +207,6 @@ fun HomePagerMiuix(
                         InfoCard(
                             systemInfo = state.systemInfo,
                             showFullStatus = state.showFullStatus,
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-                        KitsuneBankShieldHomeCardMiuix(
                             modifier = Modifier.fillMaxWidth(),
                         )
                         Spacer(Modifier.height(bottomInnerPadding))
@@ -587,42 +583,6 @@ private fun StatsRow(
 }
 
 @Composable
-private fun KitsuneBankShieldHomeCardMiuix(
-    modifier: Modifier = Modifier,
-) {
-    val context = LocalContext.current
-    val navigator = com.sukisu.nova.ui.navigation3.LocalNavigator.current
-    var hiddenCount by remember { mutableStateOf(com.sukisu.nova.folkpatch.KitsuneBankHideManager.getHiddenCount(context)) }
-
-    LaunchedEffect(Unit) {
-        hiddenCount = com.sukisu.nova.folkpatch.KitsuneBankHideManager.getHiddenCount(context)
-    }
-
-    AppCard(
-        modifier = modifier,
-        colors = backgroundAwareCardColors(),
-    ) {
-        ArrowPreference(
-            title = stringResource(R.string.kitsune_bank_hide_title),
-            summary = if (hiddenCount > 0) {
-                stringResource(R.string.kitsune_bank_protected_count, hiddenCount)
-            } else {
-                stringResource(R.string.kitsune_bank_hide_subtitle)
-            },
-            startAction = {
-                Icon(
-                    androidx.compose.material.icons.Icons.Rounded.Security,
-                    contentDescription = null,
-                    modifier = Modifier.padding(end = 6.dp),
-                    tint = colorScheme.onBackground,
-                )
-            },
-            onClick = { navigator.push(com.sukisu.nova.ui.navigation3.Route.BankHide) },
-        )
-    }
-}
-
-@Composable
 private fun SpecSheet(
     rows: List<Pair<String, String>>,
     modifier: Modifier = Modifier,
@@ -800,9 +760,6 @@ private fun HomeScreenPreviewContent(
             InfoCard(
                 systemInfo = previewSystemInfo.copy(selinuxStatus = selinuxStatus),
                 showFullStatus = true,
-                modifier = Modifier.fillMaxWidth(),
-            )
-            KitsuneBankShieldHomeCardMiuix(
                 modifier = Modifier.fillMaxWidth(),
             )
         }

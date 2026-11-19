@@ -44,8 +44,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.LaunchedEffect
 import kotlinx.coroutines.launch
 import android.widget.Toast
-import com.sukisu.nova.folkpatch.KitsuneBankHideManager
-import com.sukisu.nova.folkpatch.SafePlayIntegrityGuard
 import com.sukisu.nova.ui.navigation3.LocalNavigator
 import com.sukisu.nova.ui.navigation3.Route
 import androidx.compose.material3.Button
@@ -190,7 +188,6 @@ fun HomePagerMaterial(
             }
             StatsRow(state = state, actions = actions)
             InfoCard(systemInfo = state.systemInfo, showFullStatus = state.showFullStatus)
-            KitsuneBankShieldHomeCard()
             Spacer(Modifier.height(bottomInnerPadding))
         }
     }
@@ -614,59 +611,6 @@ private fun WarningCard(
 }
 
 @Composable
-private fun KitsuneBankShieldHomeCard(
-    modifier: Modifier = Modifier,
-) {
-    val context = LocalContext.current
-    val navigator = LocalNavigator.current
-    var hiddenCount by remember { mutableStateOf(KitsuneBankHideManager.getHiddenCount(context)) }
-
-    LaunchedEffect(Unit) {
-        hiddenCount = KitsuneBankHideManager.getHiddenCount(context)
-    }
-
-    TonalCard(
-        modifier = modifier.fillMaxWidth(),
-        shape = HeroShape,
-        onClick = { navigator.push(Route.BankHide) },
-    ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(18.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(14.dp),
-        ) {
-            IconTile(
-                Icons.Rounded.Shield,
-                stringResource(R.string.kitsune_bank_hide_title),
-            )
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = stringResource(R.string.kitsune_bank_hide_title),
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                )
-                Text(
-                    text = if (hiddenCount > 0) {
-                        stringResource(R.string.kitsune_bank_protected_count, hiddenCount)
-                    } else {
-                        stringResource(R.string.kitsune_bank_hide_subtitle)
-                    },
-                    style = MaterialTheme.typography.bodySmall,
-                    color = if (hiddenCount > 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-            }
-            Icon(
-                Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-        }
-    }
-}
-
-@Composable
 private fun SpecSheet(
     rows: List<Pair<String, String>>,
     modifier: Modifier = Modifier,
@@ -840,7 +784,6 @@ private fun HomeScreenPreviewContent(
                 actions = actions
             )
             InfoCard(previewSystemInfo.copy(selinuxStatus = selinuxStatus), showFullStatus = true)
-            KitsuneBankShieldHomeCard()
         }
     }
 }

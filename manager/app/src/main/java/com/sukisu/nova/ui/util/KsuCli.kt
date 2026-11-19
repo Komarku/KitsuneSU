@@ -174,6 +174,9 @@ fun toggleModule(id: String, enable: Boolean): Boolean {
     }
     val result = execKsud(cmd, true)
     Log.i(TAG, "$cmd result: $result")
+    if (result && enable) {
+        com.sukisu.nova.folkpatch.KitsuneBootloopGuard.recordLastModifiedModule(id)
+    }
     return result
 }
 
@@ -246,6 +249,15 @@ fun flashModule(
         val cmd = "module install ${file.absolutePath}"
         val result = flashWithIO("${getKsuDaemonPath()} $cmd", onStdout, onStderr)
         Log.i("KernelSU", "install module $uri result: $result")
+        if (result.isSuccess) {
+            runCatching {
+                val newest = File("/data/adb/modules").listFiles { f -> f.isDirectory }
+                    ?.maxByOrNull { it.lastModified() }?.name
+                if (!newest.isNullOrBlank()) {
+                    com.sukisu.nova.folkpatch.KitsuneBootloopGuard.recordLastModifiedModule(newest)
+                }
+            }
+        }
         if (shouldDeleteSourceAfterInstall(deleteSourceOnSuccess, result.isSuccess)) {
             val name = runCatching { uri.getFileName(ksuApp) }.getOrNull()
                 ?: uri.lastPathSegment?.substringAfterLast('/').orEmpty()

@@ -187,40 +187,13 @@
     <string name="kitsune_kp_saved_inactive">SuperKey saved (KernelPatch not active)</string>
     <string name="kitsune_kp_cleared">SuperKey cleared</string>
 
-    <!-- Safe Play Integrity Hide -->
-    <string name="kitsune_pi_title">Play Integrity Root Hide (Safe)</string>
-    <string name="kitsune_pi_desc">RAM-only hiding (Umount, Mount/SELinux Hide, GMS exclude, Verified Boot in RAM). Zero bootloop or brick risk.</string>
-    <string name="kitsune_pi_applied">Play Integrity hide active: %1$s</string>
-    <string name="kitsune_pi_saved_no_root">Saved! Will apply automatically once root is active.</string>
-    <string name="kitsune_pi_disabled">Play Integrity hide disabled</string>
+    <!-- Built-in Hardware Bootloop Guard -->
+    <string name="kitsune_bootloop_guard_title">Built-in Bootloop Guard</string>
+    <string name="kitsune_bootloop_guard_desc">Hardware watchdog and early boot counter (post-fs-data). Automatically detects boot failures and isolates faulty modules before system startup.</string>
+    <string name="kitsune_bootloop_guard_enabled">Bootloop protection enabled</string>
+    <string name="kitsune_bootloop_guard_disabled">Bootloop protection disabled</string>
+    <string name="kitsune_bootloop_rescued_title">⚠️ Bootloop Prevented!</string>
+    <string name="kitsune_bootloop_rescued_message">Module «%1$s» caused a boot failure and was automatically disabled by Kitsune Bootloop Guard. Your system has been successfully rescued.</string>
+    <string name="kitsune_bootloop_rescued_all_message">A critical boot failure was detected. All modules were temporarily disabled by Kitsune Bootloop Guard to restore system stability.</string>
     <string name="kitsune_home_patch_boot">Patch boot</string>
-
-    <!-- Update & Shield strings -->
-    <string name="kitsune_card_update_title">KitsuneSU v3.1.0 (Fox Edition)</string>
-    <string name="kitsune_card_update_subtitle">Kitsune Shield &amp; Play Integrity Express</string>
-    <string name="kitsune_card_update_desc">Up to date. RAM bootloader spoofing, Play Integrity root hiding and embedded Kitsunepatch.</string>
-    <string name="kitsune_btn_pi_express">Clear GMS Cache</string>
-    <string name="kitsune_btn_changelog">Changelog</string>
-    <string name="kitsune_dlg_changelog_title">KitsuneSU v3.1.0 Update</string>
-    <string name="kitsune_dlg_changelog_content"><![CDATA[<b>What\'s new in KitsuneSU 3.1.0:</b><br><br>• <b>Pure Kitsune branding:</b> removed external references for a unified experience.<br><br>• <b>Kitsunepatch Settings:</b> dedicated section for KernelPatch 0.13.9, SuperKey, and KPM modules.<br><br>• <b>Kitsune Shield (Play Integrity Express):</b> one-tap GMS attestation cache cleaning and bootloader RAM spoofing.<br><br>• <b>Static ksuinit (16KB):</b> bootloop-free boot image patching.<br><br>• <b>Clean UI:</b> removed external donation cards and update banners.]]></string>
-    <string name="kitsune_pi_cleaning">Cleaning Play Services cache &amp; applying RAM spoofing…</string>
-    <string name="kitsune_pi_clean_success">Done! GMS cache cleared and RAM bootloader state set to green/locked.</string>
-    <string name="kitsune_pi_clean_notice_title">Play Integrity Status</string>
-    <string name="kitsune_pi_clean_notice_msg"><![CDATA[✅ <b>Protections applied:</b><br>• GMS DroidGuard cache cleared<br>• Bootloader RAM state spoofed to locked/green<br>• Root mount namespaces isolated<br><br>💡 <i>Note:</i> For hardware Keymaster attestation (DEVICE &amp; STRONG INTEGRITY), install a keybox-based module like <b>PlayIntegrityFork</b> or <b>TrickyStore</b>.]]></string>
-    <!-- Bank Root Hiding (no reboot required) -->
-    <string name="kitsune_bank_hide_title">Bank App Root Hiding</string>
-    <string name="kitsune_bank_hide_subtitle">Hide root and bootloader without reboot</string>
-    <string name="kitsune_bank_hide_card_title">Root &amp; Bootloader Shield</string>
-    <string name="kitsune_bank_hide_card_desc">Isolates mount namespace (Umount), hides su binaries and spoofs bootloader status in RAM (green/locked) without phone reboot.</string>
-    <string name="kitsune_bank_hide_btn_all">Hide from all banks</string>
-    <string name="kitsune_bank_hide_filter_all">All apps</string>
-    <string name="kitsune_bank_hide_filter_banks">Banks &amp; Detectors</string>
-    <string name="kitsune_bank_hide_filter_hidden">Hidden</string>
-    <string name="kitsune_bank_hide_search">Search banks and apps…</string>
-    <string name="kitsune_bank_hide_toast_applied">Root &amp; bootloader hidden from «%1$s» without reboot!</string>
-    <string name="kitsune_bank_hide_toast_reverted">Hiding disabled for «%1$s»</string>
-    <string name="kitsune_bank_hide_toast_all">Root &amp; bootloader hidden from %1$d bank apps!</string>
-    <string name="kitsune_bank_badge">Bank</string>
-    <string name="kitsune_bank_protected_count">Protected banks: %1$d</string>
-    <string name="kitsune_bank_none_protected">Tap to select apps</string>
 </resources>
