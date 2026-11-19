@@ -89,3 +89,9 @@ The output APK will be placed in `manager/app/build/outputs/apk/release/`.
 
 ## 📜 License
 KitsuneSU is licensed under [GPL-3.0 or later](LICENSE).
+
+---
+
+## 🏷️ Keywords & Search Tags
+`kernelsu` · `kernelpatch` · `magisk-alternative` · `root-solution` · `bootloop-protector` · `init_boot` · `zygisk` · `android-root` · `android-16` · `kpm` · `safemode-rescue` · `material-you`
+

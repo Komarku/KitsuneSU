@@ -90,3 +90,9 @@ cd KitsuneSU/manager
 ## 📜 Лицензия
 KitsuneSU распространяется под лицензией [GPL-3.0 or later](LICENSE).
 
+---
+
+## 🏷️ Теги и ключевые слова
+`kernelsu` · `kernelpatch` · `magisk-alternative` · `root-solution` · `bootloop-protector` · `init_boot` · `zygisk` · `android-root` · `android-16` · `kpm` · `safemode-rescue` · `material-you`
+
+
