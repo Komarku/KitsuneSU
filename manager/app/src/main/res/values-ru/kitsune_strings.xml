@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Встроенные логотипы -->
+    <string name="app_icon_builtin_kitsune">KitsuneSU (Основной)</string>
+    <string name="app_icon_builtin_sukisu">Kitsune Classic</string>
+    <string name="app_icon_builtin_folkpatch">Kitsunepatch</string>
+    <string name="app_icon_builtin_folkpatch_alt">Kitsune Alt</string>
+    <string name="app_icon_builtin_folkpatch_anime">Kitsune Anime</string>
+
+    <!-- Главная карточка KitsuneSU -->
+    <string name="kitsune_status_working_sukisu">Работает · KitsuneSU</string>
+    <string name="kitsune_status_working_folkpatch">Работает · Kitsunepatch</string>
+    <string name="kitsune_status_not_installed">Не установлен</string>
+    <string name="kitsune_status_conflict">Конфликт рута</string>
+    <string name="kitsune_subtitle_choose">Выберите способ: init_boot (Kitsune) или boot (Kitsunepatch)</string>
+    <string name="kitsune_subtitle_sukisu_active">Активен через init_boot · %1$s</string>
+    <string name="kitsune_subtitle_folkpatch_active">Активен через boot · Kitsunepatch v%1$s</string>
+    <string name="kitsune_btn_install_init_boot">Kitsune (init_boot)</string>
+    <string name="kitsune_btn_install_boot">Kitsunepatch (boot)</string>
+    <string name="kitsune_engine_sukisu_title">KitsuneSU</string>
+    <string name="kitsune_engine_folkpatch_title">Kitsunepatch</string>
+    <string name="kitsune_engine_ready">Готово к установке</string>
+    <string name="kitsune_fp_tap_auth">SuperKey</string>
+    <string name="kitsune_unified_btn">Настройки</string>
+
+    <!-- Патчер boot (Kitsunepatch) -->
+    <string name="kitsune_folkpatch_boot_title">Патчер boot (Kitsunepatch)</string>
+    <string name="kitsune_fp_banner_title">Патч boot.img (Kitsunepatch)</string>
+    <string name="kitsune_fp_banner_subtitle">KernelPatch 0.13.9, SuperKey и вшивание модулей KPM</string>
+    <string name="kitsune_fp_mode_title">Способ установки в boot</string>
+    <string name="kitsune_fp_mode_patch_file">Патч boot.img</string>
+    <string name="kitsune_fp_mode_direct">Прямая прошивка</string>
+    <string name="kitsune_fp_mode_next_slot">Неактивный слот</string>
+    <string name="kitsune_fp_mode_unpatch">Удалить патч</string>
+    <string name="kitsune_fp_select_boot">Файл boot.img</string>
+    <string name="kitsune_fp_choose_file">Выбрать</string>
+    <string name="kitsune_fp_change_file">Изменить</string>
+    <string name="kitsune_fp_superkey_title">Свой SuperKey</string>
+    <string name="kitsune_fp_superkey_field">SuperKey (от 8 символов, буквы и цифры)</string>
+    <string name="kitsune_fp_superkey_valid">SuperKey подходит для KernelPatch</string>
+    <string name="kitsune_fp_superkey_hint">Минимум 8 символов, обязательно буквы и цифры</string>
+    <string name="kitsune_fp_custom_kpimg">Ядро KernelPatch (kpimg)</string>
+    <string name="kitsune_fp_builtin_kpimg">Встроенный kpimg v%1$s</string>
+    <string name="kitsune_fp_embed_kpm">Встроить KPM-модули</string>
+    <string name="kitsune_fp_embed_kpm_empty">KPM-модули не выбраны. Нажмите + KPM, чтобы вшить модуль в boot.img.</string>
+    <string name="kitsune_fp_kpm_args">Аргументы запуска KPM (необязательно)</string>
+    <string name="kitsune_fp_btn_patch_boot">Пропатчить boot.img</string>
+    <string name="kitsune_fp_btn_direct_flash">Пропатчить и прошить boot</string>
+    <string name="kitsune_fp_btn_next_slot">Установить в неактивный слот</string>
+    <string name="kitsune_fp_btn_unpatch">Откатить патч раздела boot</string>
+    <string name="kitsune_fp_install_ap">Установить APatch</string>
+    <string name="kitsune_fp_uninstall_ap">Удалить APatch</string>
+    <string name="kitsune_fp_output_ready">Патченый boot.img сохранён</string>
+    <string name="kitsune_fp_patch_success">Операция успешно завершена!</string>
+    <string name="kitsune_fp_console">Лог выполнения</string>
+    <string name="kitsune_fp_log_copied">Лог скопирован</string>
+    <string name="kitsune_fp_kernel_patched">Статус: уже пропатчен KernelPatch</string>
+    <string name="kitsune_fp_kernel_stock">Статус: стоковое ядро (готово к патчу)</string>
+    <string name="kitsune_kpm_load_failed">Не удалось прочитать файл KPM</string>
+
+    <!-- Защита от конфликта init_boot + boot -->
+    <string name="kitsune_active_sukisu">Активен Kitsune (init_boot). Не прошивайте boot одновременно.</string>
+    <string name="kitsune_active_folkpatch">Активен Kitsunepatch (boot). Не прошивайте init_boot одновременно.</string>
+    <string name="kitsune_choose_one_engine">Выберите ОДИН способ: init_boot (Kitsune) ИЛИ boot (Kitsunepatch).</string>
+    <string name="kitsune_conflict_warning">Внимание: активны сразу init_boot и boot! Удалите один из них во избежание конфликта.</string>
+    <string name="kitsune_conflict_sukisu_active_title">Kitsune (init_boot) уже активен</string>
+    <string name="kitsune_conflict_sukisu_active_desc">Прямая прошивка Kitsunepatch в boot заблокирована во избежание конфликта init_boot + boot. Сначала удалите Kitsune или используйте только патч файла boot.img.</string>
+    <string name="kitsune_conflict_folkpatch_active_title">Kitsunepatch (boot) уже активен</string>
+    <string name="kitsune_conflict_folkpatch_active_desc">Не прошивайте Kitsune в init_boot поверх активного Kitsunepatch в boot. Сначала выполните «Удалить патч» во вкладке Kitsunepatch.</string>
+
+    <!-- Объединённые настройки -->
+    <string name="kitsune_unified_settings_title">Настройки Kitsunepatch</string>
+    <string name="kitsune_unified_settings_subtitle">SuperKey, Liquid Glass, PathHide, звуки запуска и бэкап</string>
+    <string name="kitsune_settings_install_sukisu_title">Установка Kitsune (init_boot)</string>
+    <string name="kitsune_settings_install_sukisu_desc">Патч и прошивка init_boot (LKM / GKI / AnyKernel3)</string>
+    <string name="kitsune_settings_icons_title">Логотип и иконка (8 вариантов)</string>
+    <string name="kitsune_settings_icons_desc">KitsuneSU, Dark Fox, Anime, Classic, Zako</string>
+    <string name="kitsune_settings_search_hint">Поиск по настройкам…</string>
+
+    <!-- Категории настроек -->
+    <string name="kitsune_cat_all">Все</string>
+    <string name="kitsune_cat_general">Основные</string>
+    <string name="kitsune_cat_appearance">Оформление</string>
+    <string name="kitsune_cat_security">Защита</string>
+    <string name="kitsune_cat_function">Функции</string>
+    <string name="kitsune_cat_multimedia">Звуки</string>
+    <string name="kitsune_cat_backup">Бэкап</string>
+
+    <!-- Основные -->
+    <string name="kitsune_sec_general">Основные и движок рута</string>
+    <string name="kitsune_set_default_engine">Способ установки по умолчанию</string>
+    <string name="kitsune_set_superkey">Ключ SuperKey (Kitsunepatch)</string>
+    <string name="kitsune_set_superkey_set">Задан (%1$d симв.) · Нажмите, чтобы изменить</string>
+    <string name="kitsune_set_superkey_unset">Не задан · Нажмите для входа в Kitsunepatch</string>
+    <string name="kitsune_set_app_title">Заголовок приложения</string>
+    <string name="kitsune_set_su_path">Путь к бинарнику su</string>
+    <string name="kitsune_set_global_ns">Глобальное пространство имён</string>
+    <string name="kitsune_set_global_ns_desc">Общее пространство монтирования для рут-оболочек</string>
+    <string name="kitsune_set_magic_mount">Режим Magic Mount</string>
+    <string name="kitsune_set_magic_mount_desc">Использовать Magic Mount вместо OverlayFS для модулей</string>
+    <string name="kitsune_set_new_app_profile">Профиль новых приложений</string>
+    <string name="kitsune_profile_default">По умолчанию</string>
+    <string name="kitsune_profile_exclude">Скрывать</string>
+    <string name="kitsune_profile_grant">Выдавать рут</string>
+    <string name="kitsune_set_clean_cache">Очистить кэш патчера</string>
+    <string name="kitsune_set_clean_cache_desc">Удалить временные файлы boot.img и kpimg</string>
+    <string name="kitsune_cache_cleaned">Кэш патчера очищен</string>
+
+    <!-- Оформление -->
+    <string name="kitsune_sec_appearance">Оформление и дизайн</string>
+    <string name="kitsune_btn_all_logos">Все 8 логотипов</string>
+    <string name="kitsune_btn_palette">Цвета и фон</string>
+    <string name="kitsune_btn_custom_text">Свой текст</string>
+    <string name="kitsune_btn_theme_store">Магазин тем</string>
+    <string name="kitsune_set_home_style">Стиль главной карточки</string>
+    <string name="kitsune_style_unified">KitsuneSU</string>
+    <string name="kitsune_style_classic">Классика</string>
+    <string name="kitsune_style_v2">Сетка V2</string>
+    <string name="kitsune_style_v3">Magisk V3</string>
+    <string name="kitsune_style_v4">Герой V4</string>
+    <string name="kitsune_style_circle">Круглый</string>
+    <string name="kitsune_set_amoled">Чистый чёрный AMOLED</string>
+    <string name="kitsune_set_amoled_desc">Глубокий чёрный фон #000000 в тёмной теме</string>
+    <string name="kitsune_set_glass">Эффект стекла (Liquid Glass)</string>
+    <string name="kitsune_set_glass_desc">Полупрозрачные карточки и аккуратная обводка</string>
+    <string name="kitsune_set_glass_blur">Сила размытия</string>
+    <string name="kitsune_set_glass_alpha">Непрозрачность карточек</string>
+    <string name="kitsune_set_glass_highlight">Яркость блика</string>
+    <string name="kitsune_set_glass_border">Обводка карточек</string>
+    <string name="kitsune_set_glass_border_desc">Тонкая стеклянная рамка вокруг карточек</string>
+    <string name="kitsune_set_hide_badge">Скрыть бейдж статуса</string>
+    <string name="kitsune_set_hide_badge_desc">Убрать плашку режима с главной карточки</string>
+    <string name="kitsune_set_badge_text">Свой текст бейджа</string>
+    <string name="kitsune_set_badge_default">По умолчанию</string>
+    <string name="kitsune_set_module_banner">Баннеры модулей</string>
+    <string name="kitsune_set_module_banner_desc">Показывать обложки в списке модулей</string>
+
+    <!-- Безопасность -->
+    <string name="kitsune_sec_security">Безопасность и скрытие рута</string>
+    <string name="kitsune_set_remember_key">Запоминать SuperKey</string>
+    <string name="kitsune_set_remember_key_desc">Сохранять SuperKey между запусками менеджера</string>
+    <string name="kitsune_set_biometric">Блокировка входа (биометрия)</string>
+    <string name="kitsune_set_biometric_desc">Запрашивать отпечаток или PIN для важных действий</string>
+    <string name="kitsune_set_hide_app">Маскировка приложения</string>
+    <string name="kitsune_set_hide_app_desc">Режим скрытого отображения в лаунчере</string>
+    <string name="kitsune_set_pathhide">PathHide (KernelPatch)</string>
+    <string name="kitsune_set_pathhide_desc">Скрытие рут-путей на уровне ядра KernelPatch</string>
+    <string name="kitsune_set_netisolate">NetIsolate (KernelPatch)</string>
+    <string name="kitsune_set_netisolate_desc">Изоляция сети для выбранных приложений через ядро</string>
+
+    <!-- Функции -->
+    <string name="kitsune_sec_functions">Функции и модули</string>
+    <string name="kitsune_set_shizuku">Встроенный мост Shizuku</string>
+    <string name="kitsune_set_shizuku_desc">Предоставлять права Shizuku через Kitsunepatch</string>
+    <string name="kitsune_set_jailbreak">Режим Jailbreak</string>
+    <string name="kitsune_set_jailbreak_desc">Временная загрузка kernelpatch.ko без прошивки boot</string>
+    <string name="kitsune_set_auto_ap">Автоустановка AndroidPatch (apd)</string>
+    <string name="kitsune_set_auto_ap_desc">Предлагать установку apd при активном KernelPatch</string>
+
+    <!-- Звуки -->
+    <string name="kitsune_sec_multimedia">Звуки при запуске</string>
+    <string name="kitsune_set_startup_sound">Звук при открытии приложения</string>
+    <string name="kitsune_set_startup_sound_desc">Проигрывать выбранную фразу при запуске KitsuneSU</string>
+    <string name="kitsune_set_sound_pick">Нажмите на звук, чтобы выбрать и прослушать</string>
+
+    <!-- Бэкап -->
+    <string name="kitsune_sec_backup">Резервное копирование</string>
+    <string name="kitsune_btn_export_json">Сохранить в JSON</string>
+    <string name="kitsune_btn_import_json">Загрузить JSON</string>
+    <string name="kitsune_btn_reset_defaults">Сбросить настройки по умолчанию</string>
+    <string name="kitsune_backup_exported">Настройки сохранены в JSON</string>
+    <string name="kitsune_backup_imported">Настройки восстановлены</string>
+    <string name="kitsune_backup_error">Некорректный файл резервной копии</string>
+    <string name="kitsune_reset_done">Настройки сброшены по умолчанию</string>
+
+    <!-- Диалоги -->
+    <string name="kitsune_dlg_superkey_title">Ключ SuperKey (Kitsunepatch)</string>
+    <string name="kitsune_dlg_superkey_desc">Введите ваш SuperKey от KernelPatch для доступа к руту Kitsunepatch (boot) и управления KPM.</string>
+    <string name="kitsune_dlg_auth">Войти</string>
+    <string name="kitsune_dlg_save">Сохранить</string>
+    <string name="kitsune_dlg_clear">Очистить</string>
+    <string name="kitsune_dlg_cancel">Отмена</string>
+    <string name="kitsune_kp_unlocked">KernelPatch v%1$s разблокирован!</string>
+    <string name="kitsune_kp_saved_inactive">SuperKey сохранён (KernelPatch сейчас не активен)</string>
+    <string name="kitsune_kp_cleared">SuperKey очищен</string>
+
+    <!-- Безопасное скрытие от Play Integrity -->
+    <string name="kitsune_pi_title">Скрытие от Play Integrity (безопасно)</string>
+    <string name="kitsune_pi_desc">Работает только в RAM (Umount, Mount/SELinux Hide, исключение GMS и Verified Boot в памяти). Без риска бутлупа и брика.</string>
+    <string name="kitsune_pi_applied">Скрытие Play Integrity активно: %1$s</string>
+    <string name="kitsune_pi_saved_no_root">Сохранено! Применится автоматически после установки рута.</string>
+    <string name="kitsune_pi_disabled">Скрытие Play Integrity отключено</string>
+    <string name="kitsune_home_patch_boot">Патч boot</string>
+
+    <!-- Обновление KitsuneSU 3.1 & Kitsune Shield -->
+    <string name="kitsune_card_update_title">KitsuneSU v3.1.0 (Fox Edition)</string>
+    <string name="kitsune_card_update_subtitle">Kitsune Shield &amp; Play Integrity Express</string>
+    <string name="kitsune_card_update_desc">Актуальная версия. RAM-антидетект загрузчика, защита от проверок Play Integrity и встроенный Kitsunepatch.</string>
+    <string name="kitsune_btn_pi_express">Очистить кэш GMS</string>
+    <string name="kitsune_btn_changelog">Что нового</string>
+    <string name="kitsune_dlg_changelog_title">Обновление KitsuneSU v3.1.0</string>
+    <string name="kitsune_dlg_changelog_content"><![CDATA[<b>Что нового в KitsuneSU 3.1.0:</b><br><br>• <b>Полный ребрендинг:</b> удалены все упоминания сторонних утилит, теперь весь интерфейс полностью в едином стиле KitsuneSU на русском языке.<br><br>• <b>Настройки Kitsunepatch:</b> выделенное меню для параметров KernelPatch 0.13.9, SuperKey, PathHide и KPM-модулей.<br><br>• <b>Kitsune Shield (Play Integrity Express):</b> очистка кэша Google Play Services в 1 клик и сброс флагов загрузчика в RAM без риска бутлупа.<br><br>• <b>Статический ksuinit (16KB):</b> надёжный запуск на Android 14/15/16 с поддержкой страниц памяти 16 КБ.<br><br>• <b>Чистый интерфейс:</b> удалены ссылки пожертвований и сторонние баннеры обновлений.]]></string>
+    <string name="kitsune_pi_cleaning">Очистка кэша Play Services и RAM-спуфинг…</string>
+    <string name="kitsune_pi_clean_success">Готово! Кэш Play Services очищен, флаги в RAM подменены (зелёный Verified Boot).</string>
+    <string name="kitsune_pi_clean_notice_title">Статус Play Integrity</string>
+    <string name="kitsune_pi_clean_notice_msg"><![CDATA[✅ <b>Антидетект применён:</b><br>• Кэш GMS DroidGuard очищен<br>• Флаги bootloader в RAM сброшены в green/locked<br>• Пространства монтирования изолированы<br><br>💡 <i>Обратите внимание:</i> для прохождения <b>DEVICE</b> и <b>STRONG INTEGRITY</b> (аппаратный Keymaster) требуется модуль с актуальным ключом Keybox (например, <b>PlayIntegrityFork</b> или <b>TrickyStore</b> во вкладке Модули).]]></string>
+
+    <!-- Динамический менеджер (русский перевод) -->
+    <string name="dynamic_manager_title">Динамические менеджеры</string>
+    <string name="dynamic_manager_summary">Управление доверенными менеджерами KitsuneSU</string>
+    <string name="dynamic_manager_enabled">Динамические менеджеры включены</string>
+    <string name="dynamic_manager_add">Добавить менеджер</string>
+    <string name="dynamic_manager_remove">Удалить менеджер</string>
+</resources>

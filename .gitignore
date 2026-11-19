@@ -1,0 +1,35 @@
+# Android & Gradle
+.gradle/
+build/
+*/build/
+*/*/build/
+.cxx/
+*/.cxx/
+*/*/.cxx/
+local.properties
+Captures/
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+
+# IDE & Editor
+.idea/
+*.iml
+.vscode/
+.DS_Store
+AGENTS.md
+/.cursor
+/.claude
+
+# Rust & Cargo
+/target/
+.cargo/config.toml
+__pycache__/
+*.pyc
+
+# Distribution & Repack
+/dist/
+/repack-config.json
+/userspace/ksud/.lkm_image_bootstrap.o

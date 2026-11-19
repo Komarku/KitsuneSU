@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#FFFFFFFF</color>
+    <color name="ic_launcher_alt_foreground">#FF1E110D</color>
+    <color name="ic_launcher_zako_foreground">#FF1E110D</color>
+    <color name="ic_launcher_foreground">#FF1E110D</color>
+    <color name="ic_splash_background">#FFF5F5F5</color>
+    <color name="ic_launcher_kitsune_background">#FFFFF3EC</color>
+    <color name="ic_launcher_folkpatch_background">#FFFFFFFF</color>
+    <color name="ic_launcher_folkpatch_foreground">#FF34C77B</color>
+    <color name="ic_launcher_folkpatch_alt_background">#FF081B11</color>
+    <color name="ic_launcher_folkpatch_alt_foreground">#FF3DDC84</color>
+    <color name="ic_launcher_folkpatch_alt_stroke">#FF237C4B</color>
+    <color name="ic_launcher_folkpatch_anime_background">#FFFFFFFF</color>
+</resources>

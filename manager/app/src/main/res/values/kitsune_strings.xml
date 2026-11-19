@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Built-in App Icons -->
+    <string name="app_icon_builtin_kitsune">KitsuneSU (Default)</string>
+    <string name="app_icon_builtin_sukisu">Kitsune Classic</string>
+    <string name="app_icon_builtin_folkpatch">Kitsunepatch</string>
+    <string name="app_icon_builtin_folkpatch_alt">Kitsune Alt</string>
+    <string name="app_icon_builtin_folkpatch_anime">Kitsune Anime</string>
+
+    <!-- Home Hero Card -->
+    <string name="kitsune_status_working_sukisu">Working · KitsuneSU</string>
+    <string name="kitsune_status_working_folkpatch">Working · Kitsunepatch</string>
+    <string name="kitsune_status_not_installed">Not installed</string>
+    <string name="kitsune_status_conflict">Root conflict</string>
+    <string name="kitsune_subtitle_choose">Choose method: init_boot (Kitsune) or boot (Kitsunepatch)</string>
+    <string name="kitsune_subtitle_sukisu_active">Active via init_boot · %1$s</string>
+    <string name="kitsune_subtitle_folkpatch_active">Active via boot · Kitsunepatch v%1$s</string>
+    <string name="kitsune_btn_install_init_boot">Kitsune (init_boot)</string>
+    <string name="kitsune_btn_install_boot">Kitsunepatch (boot)</string>
+    <string name="kitsune_engine_sukisu_title">KitsuneSU</string>
+    <string name="kitsune_engine_folkpatch_title">Kitsunepatch</string>
+    <string name="kitsune_engine_ready">Ready</string>
+    <string name="kitsune_fp_tap_auth">SuperKey</string>
+    <string name="kitsune_unified_btn">Settings</string>
+
+    <!-- Kitsunepatch Boot Patcher -->
+    <string name="kitsune_folkpatch_boot_title">Kitsunepatch Boot Patcher</string>
+    <string name="kitsune_fp_banner_title">Patch boot.img (Kitsunepatch)</string>
+    <string name="kitsune_fp_banner_subtitle">KernelPatch 0.13.9, SuperKey and embedded KPM modules</string>
+    <string name="kitsune_fp_mode_title">Installation mode (boot)</string>
+    <string name="kitsune_fp_mode_patch_file">Patch boot.img</string>
+    <string name="kitsune_fp_mode_direct">Direct flash (boot)</string>
+    <string name="kitsune_fp_mode_next_slot">Inactive slot (OTA)</string>
+    <string name="kitsune_fp_mode_unpatch">Unpatch boot</string>
+    <string name="kitsune_fp_select_boot">Target boot.img</string>
+    <string name="kitsune_fp_choose_file">Select</string>
+    <string name="kitsune_fp_change_file">Change</string>
+    <string name="kitsune_fp_superkey_title">Custom SuperKey</string>
+    <string name="kitsune_fp_superkey_field">SuperKey (8+ chars, letters &amp; digits)</string>
+    <string name="kitsune_fp_superkey_valid">SuperKey is valid</string>
+    <string name="kitsune_fp_superkey_hint">Minimum 8 characters with letters and digits</string>
+    <string name="kitsune_fp_custom_kpimg">KernelPatch image (kpimg)</string>
+    <string name="kitsune_fp_builtin_kpimg">Built-in kpimg v%1$s</string>
+    <string name="kitsune_fp_embed_kpm">Embed KPM modules</string>
+    <string name="kitsune_fp_embed_kpm_empty">No KPM modules added. Tap + KPM to embed into boot.img.</string>
+    <string name="kitsune_fp_kpm_args">KPM boot arguments (optional)</string>
+    <string name="kitsune_fp_btn_patch_boot">Patch boot.img</string>
+    <string name="kitsune_fp_btn_direct_flash">Patch &amp; flash boot</string>
+    <string name="kitsune_fp_btn_next_slot">Install to inactive slot</string>
+    <string name="kitsune_fp_btn_unpatch">Unpatch boot partition</string>
+    <string name="kitsune_fp_install_ap">Install APatch</string>
+    <string name="kitsune_fp_uninstall_ap">Uninstall APatch</string>
+    <string name="kitsune_fp_output_ready">Patched boot.img saved</string>
+    <string name="kitsune_fp_patch_success">Completed successfully</string>
+    <string name="kitsune_fp_console">Console output</string>
+    <string name="kitsune_fp_log_copied">Log copied</string>
+    <string name="kitsune_fp_kernel_patched">Status: Already patched with KernelPatch</string>
+    <string name="kitsune_fp_kernel_stock">Status: Stock kernel (ready to patch)</string>
+    <string name="kitsune_kpm_load_failed">Failed to read selected KPM file</string>
+
+    <!-- Conflict Guard -->
+    <string name="kitsune_active_sukisu">Active: Kitsune (init_boot). Do not flash boot at the same time.</string>
+    <string name="kitsune_active_folkpatch">Active: Kitsunepatch (boot). Do not flash init_boot at the same time.</string>
+    <string name="kitsune_choose_one_engine">Choose ONE method: init_boot (Kitsune) OR boot (Kitsunepatch).</string>
+    <string name="kitsune_conflict_warning">Warning: both init_boot and boot appear patched! Remove one to avoid conflicts.</string>
+    <string name="kitsune_conflict_sukisu_active_title">Kitsune (init_boot) is already active</string>
+    <string name="kitsune_conflict_sukisu_active_desc">Direct flashing Kitsunepatch to boot is blocked to prevent root conflict. Uninstall Kitsune first or patch an offline boot.img file only.</string>
+    <string name="kitsune_conflict_folkpatch_active_title">Kitsunepatch (boot) is already active</string>
+    <string name="kitsune_conflict_folkpatch_active_desc">Do not flash Kitsune to init_boot while Kitsunepatch is active in boot. Unpatch boot first to prevent conflict.</string>
+
+    <!-- Unified Settings -->
+    <string name="kitsune_unified_settings_title">Kitsunepatch Settings</string>
+    <string name="kitsune_unified_settings_subtitle">SuperKey, Liquid Glass, PathHide, startup sounds and backup</string>
+    <string name="kitsune_settings_install_sukisu_title">Install Kitsune (init_boot)</string>
+    <string name="kitsune_settings_install_sukisu_desc">Patch or flash init_boot (LKM / GKI / AnyKernel3)</string>
+    <string name="kitsune_settings_icons_title">App Icon &amp; Logos (8 built-in)</string>
+    <string name="kitsune_settings_icons_desc">KitsuneSU, Dark Fox, Anime, Classic, Zako</string>
+    <string name="kitsune_settings_search_hint">Search settings…</string>
+
+    <!-- Settings Categories -->
+    <string name="kitsune_cat_all">All</string>
+    <string name="kitsune_cat_general">General</string>
+    <string name="kitsune_cat_appearance">Design</string>
+    <string name="kitsune_cat_security">Security</string>
+    <string name="kitsune_cat_function">Functions</string>
+    <string name="kitsune_cat_multimedia">Sounds</string>
+    <string name="kitsune_cat_backup">Backup</string>
+
+    <!-- General Settings -->
+    <string name="kitsune_sec_general">General &amp; Root Engine</string>
+    <string name="kitsune_set_default_engine">Default installation method</string>
+    <string name="kitsune_set_superkey">SuperKey (Kitsunepatch)</string>
+    <string name="kitsune_set_superkey_set">Configured (%1$d chars) · Tap to change</string>
+    <string name="kitsune_set_superkey_unset">Not set · Tap to unlock Kitsunepatch</string>
+    <string name="kitsune_set_app_title">Header title</string>
+    <string name="kitsune_set_su_path">SU binary path</string>
+    <string name="kitsune_set_global_ns">Global mount namespace</string>
+    <string name="kitsune_set_global_ns_desc">Share mount namespace across root shells</string>
+    <string name="kitsune_set_magic_mount">Magic Mount mode</string>
+    <string name="kitsune_set_magic_mount_desc">Use Kitsunepatch Magic Mount instead of OverlayFS</string>
+    <string name="kitsune_set_new_app_profile">New app default profile</string>
+    <string name="kitsune_profile_default">Default</string>
+    <string name="kitsune_profile_exclude">Auto exclude</string>
+    <string name="kitsune_profile_grant">Auto grant</string>
+    <string name="kitsune_set_clean_cache">Clean patcher cache</string>
+    <string name="kitsune_set_clean_cache_desc">Delete temporary boot.img and kpimg working files</string>
+    <string name="kitsune_cache_cleaned">Cache cleaned</string>
+
+    <!-- Appearance Settings -->
+    <string name="kitsune_sec_appearance">Design &amp; Appearance</string>
+    <string name="kitsune_btn_all_logos">All 8 logos</string>
+    <string name="kitsune_btn_palette">Colors &amp; Blur</string>
+    <string name="kitsune_btn_custom_text">Custom text</string>
+    <string name="kitsune_btn_theme_store">Theme Store</string>
+    <string name="kitsune_set_home_style">Home card style</string>
+    <string name="kitsune_style_unified">KitsuneSU</string>
+    <string name="kitsune_style_classic">Classic</string>
+    <string name="kitsune_style_v2">Grid V2</string>
+    <string name="kitsune_style_v3">Magisk V3</string>
+    <string name="kitsune_style_v4">Hero V4</string>
+    <string name="kitsune_style_circle">Circle</string>
+    <string name="kitsune_set_amoled">AMOLED pure black</string>
+    <string name="kitsune_set_amoled_desc">True #000000 black background in dark theme</string>
+    <string name="kitsune_set_glass">Liquid Glass effect</string>
+    <string name="kitsune_set_glass_desc">Translucent frosted glass cards and borders</string>
+    <string name="kitsune_set_glass_blur">Blur intensity</string>
+    <string name="kitsune_set_glass_alpha">Card opacity</string>
+    <string name="kitsune_set_glass_highlight">Glass highlight</string>
+    <string name="kitsune_set_glass_border">Glass border outline</string>
+    <string name="kitsune_set_glass_border_desc">Subtle hairline border around glass cards</string>
+    <string name="kitsune_set_hide_badge">Hide status badge</string>
+    <string name="kitsune_set_hide_badge_desc">Hide status pill on the main KitsuneSU card</string>
+    <string name="kitsune_set_badge_text">Custom badge text</string>
+    <string name="kitsune_set_badge_default">Default</string>
+    <string name="kitsune_set_module_banner">Module cover banners</string>
+    <string name="kitsune_set_module_banner_desc">Show banner artwork on module cards</string>
+
+    <!-- Security Settings -->
+    <string name="kitsune_sec_security">Security &amp; Root Hiding</string>
+    <string name="kitsune_set_remember_key">Remember SuperKey</string>
+    <string name="kitsune_set_remember_key_desc">Keep Kitsunepatch SuperKey saved between launches</string>
+    <string name="kitsune_set_biometric">App lock (Biometrics)</string>
+    <string name="kitsune_set_biometric_desc">Require device lock for sensitive actions</string>
+    <string name="kitsune_set_hide_app">Hide app disguise</string>
+    <string name="kitsune_set_hide_app_desc">Enable launcher disguise mode</string>
+    <string name="kitsune_set_pathhide">KernelPatch PathHide</string>
+    <string name="kitsune_set_pathhide_desc">Hide root paths via KernelPatch supercall</string>
+    <string name="kitsune_set_netisolate">KernelPatch NetIsolate</string>
+    <string name="kitsune_set_netisolate_desc">Kernel-level network isolation for selected UIDs</string>
+
+    <!-- Functions Settings -->
+    <string name="kitsune_sec_functions">Functions &amp; Modules</string>
+    <string name="kitsune_set_shizuku">Built-in Shizuku bridge</string>
+    <string name="kitsune_set_shizuku_desc">Provide Kitsunepatch Shizuku root bridge</string>
+    <string name="kitsune_set_jailbreak">Jailbreak mode</string>
+    <string name="kitsune_set_jailbreak_desc">Temporary kernelpatch.ko mode without boot flash</string>
+    <string name="kitsune_set_auto_ap">Auto-install AndroidPatch (apd)</string>
+    <string name="kitsune_set_auto_ap_desc">Offer apd deployment when KernelPatch is active</string>
+
+    <!-- Multimedia Settings -->
+    <string name="kitsune_sec_multimedia">Startup Sounds</string>
+    <string name="kitsune_set_startup_sound">Play sound on launch</string>
+    <string name="kitsune_set_startup_sound_desc">Play selected voice line when opening KitsuneSU</string>
+    <string name="kitsune_set_sound_pick">Tap a sound to select and preview</string>
+
+    <!-- Backup Settings -->
+    <string name="kitsune_sec_backup">Backup &amp; Restore</string>
+    <string name="kitsune_btn_export_json">Export JSON</string>
+    <string name="kitsune_btn_import_json">Import JSON</string>
+    <string name="kitsune_btn_reset_defaults">Reset settings to default</string>
+    <string name="kitsune_backup_exported">Settings exported</string>
+    <string name="kitsune_backup_imported">Settings restored</string>
+    <string name="kitsune_backup_error">Invalid backup file</string>
+    <string name="kitsune_reset_done">Settings reset to default</string>
+
+    <!-- Dialogs -->
+    <string name="kitsune_dlg_superkey_title">SuperKey (Kitsunepatch)</string>
+    <string name="kitsune_dlg_superkey_desc">Enter your KernelPatch SuperKey to unlock Kitsunepatch (boot) root access and KPM control.</string>
+    <string name="kitsune_dlg_auth">Unlock</string>
+    <string name="kitsune_dlg_save">Save</string>
+    <string name="kitsune_dlg_clear">Clear</string>
+    <string name="kitsune_dlg_cancel">Cancel</string>
+    <string name="kitsune_kp_unlocked">KernelPatch v%1$s unlocked!</string>
+    <string name="kitsune_kp_saved_inactive">SuperKey saved (KernelPatch not active)</string>
+    <string name="kitsune_kp_cleared">SuperKey cleared</string>
+
+    <!-- Safe Play Integrity Hide -->
+    <string name="kitsune_pi_title">Play Integrity Root Hide (Safe)</string>
+    <string name="kitsune_pi_desc">RAM-only hiding (Umount, Mount/SELinux Hide, GMS exclude, Verified Boot in RAM). Zero bootloop or brick risk.</string>
+    <string name="kitsune_pi_applied">Play Integrity hide active: %1$s</string>
+    <string name="kitsune_pi_saved_no_root">Saved! Will apply automatically once root is active.</string>
+    <string name="kitsune_pi_disabled">Play Integrity hide disabled</string>
+    <string name="kitsune_home_patch_boot">Patch boot</string>
+
+    <!-- Update & Shield strings -->
+    <string name="kitsune_card_update_title">KitsuneSU v3.1.0 (Fox Edition)</string>
+    <string name="kitsune_card_update_subtitle">Kitsune Shield &amp; Play Integrity Express</string>
+    <string name="kitsune_card_update_desc">Up to date. RAM bootloader spoofing, Play Integrity root hiding and embedded Kitsunepatch.</string>
+    <string name="kitsune_btn_pi_express">Clear GMS Cache</string>
+    <string name="kitsune_btn_changelog">Changelog</string>
+    <string name="kitsune_dlg_changelog_title">KitsuneSU v3.1.0 Update</string>
+    <string name="kitsune_dlg_changelog_content"><![CDATA[<b>What\'s new in KitsuneSU 3.1.0:</b><br><br>• <b>Pure Kitsune branding:</b> removed external references for a unified experience.<br><br>• <b>Kitsunepatch Settings:</b> dedicated section for KernelPatch 0.13.9, SuperKey, and KPM modules.<br><br>• <b>Kitsune Shield (Play Integrity Express):</b> one-tap GMS attestation cache cleaning and bootloader RAM spoofing.<br><br>• <b>Static ksuinit (16KB):</b> bootloop-free boot image patching.<br><br>• <b>Clean UI:</b> removed external donation cards and update banners.]]></string>
+    <string name="kitsune_pi_cleaning">Cleaning Play Services cache &amp; applying RAM spoofing…</string>
+    <string name="kitsune_pi_clean_success">Done! GMS cache cleared and RAM bootloader state set to green/locked.</string>
+    <string name="kitsune_pi_clean_notice_title">Play Integrity Status</string>
+    <string name="kitsune_pi_clean_notice_msg"><![CDATA[✅ <b>Protections applied:</b><br>• GMS DroidGuard cache cleared<br>• Bootloader RAM state spoofed to locked/green<br>• Root mount namespaces isolated<br><br>💡 <i>Note:</i> For hardware Keymaster attestation (DEVICE &amp; STRONG INTEGRITY), install a keybox-based module like <b>PlayIntegrityFork</b> or <b>TrickyStore</b>.]]></string>
+</resources>
