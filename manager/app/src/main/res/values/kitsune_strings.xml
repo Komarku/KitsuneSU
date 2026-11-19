@@ -207,4 +207,20 @@
     <string name="kitsune_pi_clean_success">Done! GMS cache cleared and RAM bootloader state set to green/locked.</string>
     <string name="kitsune_pi_clean_notice_title">Play Integrity Status</string>
     <string name="kitsune_pi_clean_notice_msg"><![CDATA[✅ <b>Protections applied:</b><br>• GMS DroidGuard cache cleared<br>• Bootloader RAM state spoofed to locked/green<br>• Root mount namespaces isolated<br><br>💡 <i>Note:</i> For hardware Keymaster attestation (DEVICE &amp; STRONG INTEGRITY), install a keybox-based module like <b>PlayIntegrityFork</b> or <b>TrickyStore</b>.]]></string>
+    <!-- Bank Root Hiding (no reboot required) -->
+    <string name="kitsune_bank_hide_title">Bank App Root Hiding</string>
+    <string name="kitsune_bank_hide_subtitle">Hide root and bootloader without reboot</string>
+    <string name="kitsune_bank_hide_card_title">Root &amp; Bootloader Shield</string>
+    <string name="kitsune_bank_hide_card_desc">Isolates mount namespace (Umount), hides su binaries and spoofs bootloader status in RAM (green/locked) without phone reboot.</string>
+    <string name="kitsune_bank_hide_btn_all">Hide from all banks</string>
+    <string name="kitsune_bank_hide_filter_all">All apps</string>
+    <string name="kitsune_bank_hide_filter_banks">Banks &amp; Detectors</string>
+    <string name="kitsune_bank_hide_filter_hidden">Hidden</string>
+    <string name="kitsune_bank_hide_search">Search banks and apps…</string>
+    <string name="kitsune_bank_hide_toast_applied">Root &amp; bootloader hidden from «%1$s» without reboot!</string>
+    <string name="kitsune_bank_hide_toast_reverted">Hiding disabled for «%1$s»</string>
+    <string name="kitsune_bank_hide_toast_all">Root &amp; bootloader hidden from %1$d bank apps!</string>
+    <string name="kitsune_bank_badge">Bank</string>
+    <string name="kitsune_bank_protected_count">Protected banks: %1$d</string>
+    <string name="kitsune_bank_none_protected">Tap to select apps</string>
 </resources>

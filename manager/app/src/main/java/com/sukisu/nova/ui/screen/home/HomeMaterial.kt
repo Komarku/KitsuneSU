@@ -33,6 +33,7 @@ import androidx.compose.material.icons.filled.VolunteerActivism
 import androidx.compose.material.icons.rounded.Block
 import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material.icons.rounded.Security
+import androidx.compose.material.icons.rounded.Shield
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.runtime.getValue
@@ -43,7 +44,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.LaunchedEffect
 import kotlinx.coroutines.launch
 import android.widget.Toast
+import com.sukisu.nova.folkpatch.KitsuneBankHideManager
 import com.sukisu.nova.folkpatch.SafePlayIntegrityGuard
+import com.sukisu.nova.ui.navigation3.LocalNavigator
+import com.sukisu.nova.ui.navigation3.Route
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -186,7 +190,7 @@ fun HomePagerMaterial(
             }
             StatsRow(state = state, actions = actions)
             InfoCard(systemInfo = state.systemInfo, showFullStatus = state.showFullStatus)
-            KitsuneUpdateAndShieldCard()
+            KitsuneBankShieldHomeCard()
             Spacer(Modifier.height(bottomInnerPadding))
         }
     }
@@ -610,130 +614,54 @@ private fun WarningCard(
 }
 
 @Composable
-private fun KitsuneUpdateAndShieldCard(
+private fun KitsuneBankShieldHomeCard(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    var showChangelog by remember { mutableStateOf(false) }
-    var noticeMessage by remember { mutableStateOf<String?>(null) }
-    var isOptimizing by remember { mutableStateOf(false) }
+    val navigator = LocalNavigator.current
+    var hiddenCount by remember { mutableStateOf(KitsuneBankHideManager.getHiddenCount(context)) }
 
-    val changelogDialog = rememberConfirmDialog(onConfirm = {})
-    val noticeDialog = rememberConfirmDialog(onConfirm = {})
-
-    LaunchedEffect(showChangelog) {
-        if (showChangelog) {
-            changelogDialog.showConfirm(
-                title = context.getString(R.string.kitsune_dlg_changelog_title),
-                content = context.getString(R.string.kitsune_dlg_changelog_content),
-                markdown = false,
-                confirm = context.getString(android.R.string.ok),
-            )
-            showChangelog = false
-        }
-    }
-
-    LaunchedEffect(noticeMessage) {
-        val msg = noticeMessage
-        if (msg != null) {
-            noticeDialog.showConfirm(
-                title = context.getString(R.string.kitsune_pi_clean_notice_title),
-                content = msg,
-                markdown = false,
-                confirm = context.getString(android.R.string.ok),
-            )
-            noticeMessage = null
-        }
+    LaunchedEffect(Unit) {
+        hiddenCount = KitsuneBankHideManager.getHiddenCount(context)
     }
 
     TonalCard(
         modifier = modifier.fillMaxWidth(),
         shape = HeroShape,
+        onClick = { navigator.push(Route.BankHide) },
     ) {
-        Column(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(18.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(12.dp),
-            ) {
-                IconTile(
-                    Icons.Rounded.Security,
-                    stringResource(R.string.kitsune_card_update_title),
-                )
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = stringResource(R.string.kitsune_card_update_title),
-                        style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.Bold,
-                    )
-                    Text(
-                        text = stringResource(R.string.kitsune_card_update_subtitle),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
-            }
-
-            Text(
-                text = stringResource(R.string.kitsune_card_update_desc),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            IconTile(
+                Icons.Rounded.Shield,
+                stringResource(R.string.kitsune_bank_hide_title),
             )
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                Button(
-                    onClick = {
-                        if (isOptimizing) return@Button
-                        isOptimizing = true
-                        Toast.makeText(context, R.string.kitsune_pi_cleaning, Toast.LENGTH_SHORT).show()
-                        scope.launch {
-                            val (ok, _) = SafePlayIntegrityGuard.cleanGmsCacheAndOptimize(context)
-                            isOptimizing = false
-                            Toast.makeText(context, if (ok) R.string.kitsune_pi_clean_success else R.string.operation_failed, Toast.LENGTH_SHORT).show()
-                            noticeMessage = context.getString(R.string.kitsune_pi_clean_notice_msg)
-                        }
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = stringResource(R.string.kitsune_bank_hide_title),
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Bold,
+                )
+                Text(
+                    text = if (hiddenCount > 0) {
+                        stringResource(R.string.kitsune_bank_protected_count, hiddenCount)
+                    } else {
+                        stringResource(R.string.kitsune_bank_hide_subtitle)
                     },
-                    modifier = Modifier.weight(1f),
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Refresh,
-                        contentDescription = null,
-                        modifier = Modifier.size(16.dp),
-                    )
-                    Spacer(Modifier.width(6.dp))
-                    Text(
-                        text = stringResource(R.string.kitsune_btn_pi_express),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                }
-
-                OutlinedButton(
-                    onClick = { showChangelog = true },
-                    modifier = Modifier.weight(1f),
-                ) {
-                    Icon(
-                        imageVector = Icons.Rounded.Info,
-                        contentDescription = null,
-                        modifier = Modifier.size(16.dp),
-                    )
-                    Spacer(Modifier.width(6.dp))
-                    Text(
-                        text = stringResource(R.string.kitsune_btn_changelog),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                }
+                    style = MaterialTheme.typography.bodySmall,
+                    color = if (hiddenCount > 0) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant,
+                )
             }
+            Icon(
+                Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
         }
     }
 }
@@ -912,7 +840,7 @@ private fun HomeScreenPreviewContent(
                 actions = actions
             )
             InfoCard(previewSystemInfo.copy(selinuxStatus = selinuxStatus), showFullStatus = true)
-            KitsuneUpdateAndShieldCard()
+            KitsuneBankShieldHomeCard()
         }
     }
 }

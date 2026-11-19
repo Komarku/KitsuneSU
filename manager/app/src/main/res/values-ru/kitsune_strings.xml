@@ -214,4 +214,20 @@
     <string name="dynamic_manager_enabled">Динамические менеджеры включены</string>
     <string name="dynamic_manager_add">Добавить менеджер</string>
     <string name="dynamic_manager_remove">Удалить менеджер</string>
+    <!-- Скрытие от банковских приложений (без перезагрузки) -->
+    <string name="kitsune_bank_hide_title">Скрытие от банковских приложений</string>
+    <string name="kitsune_bank_hide_subtitle">Скрытие root и загрузчика без перезагрузки</string>
+    <string name="kitsune_bank_hide_card_title">Защита от детекта root и загрузчика</string>
+    <string name="kitsune_bank_hide_card_desc">Изолирует пространство монтирования (Umount), скрывает бинарники su и подменяет статус загрузчика в RAM (green/locked) без перезагрузки телефона.</string>
+    <string name="kitsune_bank_hide_btn_all">Скрыть от всех банков</string>
+    <string name="kitsune_bank_hide_filter_all">Все приложения</string>
+    <string name="kitsune_bank_hide_filter_banks">Банки и детекторы</string>
+    <string name="kitsune_bank_hide_filter_hidden">Скрытые</string>
+    <string name="kitsune_bank_hide_search">Поиск банков и приложений…</string>
+    <string name="kitsune_bank_hide_toast_applied">Рут и загрузчик скрыты от «%1$s» без перезагрузки!</string>
+    <string name="kitsune_bank_hide_toast_reverted">Скрытие отключено для «%1$s»</string>
+    <string name="kitsune_bank_hide_toast_all">Рут и загрузчик скрыты от %1$d банковских приложений!</string>
+    <string name="kitsune_bank_badge">Банк</string>
+    <string name="kitsune_bank_protected_count">Защищено банков: %1$d</string>
+    <string name="kitsune_bank_none_protected">Нажмите для выбора банков</string>
 </resources>

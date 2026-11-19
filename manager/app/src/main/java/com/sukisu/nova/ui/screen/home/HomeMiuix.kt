@@ -210,7 +210,7 @@ fun HomePagerMiuix(
                             showFullStatus = state.showFullStatus,
                             modifier = Modifier.fillMaxWidth(),
                         )
-                        KitsuneUpdateAndShieldCardMiuix(
+                        KitsuneBankShieldHomeCardMiuix(
                             modifier = Modifier.fillMaxWidth(),
                         )
                         Spacer(Modifier.height(bottomInnerPadding))
@@ -587,112 +587,38 @@ private fun StatsRow(
 }
 
 @Composable
-private fun KitsuneUpdateAndShieldCardMiuix(
+private fun KitsuneBankShieldHomeCardMiuix(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    var showChangelog by remember { mutableStateOf(false) }
-    var noticeMessage by remember { mutableStateOf<String?>(null) }
-    var isOptimizing by remember { mutableStateOf(false) }
+    val navigator = com.sukisu.nova.ui.navigation3.LocalNavigator.current
+    var hiddenCount by remember { mutableStateOf(com.sukisu.nova.folkpatch.KitsuneBankHideManager.getHiddenCount(context)) }
 
-    val changelogDialog = rememberConfirmDialog(onConfirm = {})
-    val noticeDialog = rememberConfirmDialog(onConfirm = {})
-
-    LaunchedEffect(showChangelog) {
-        if (showChangelog) {
-            changelogDialog.showConfirm(
-                title = context.getString(R.string.kitsune_dlg_changelog_title),
-                content = context.getString(R.string.kitsune_dlg_changelog_content),
-                markdown = false,
-                confirm = context.getString(android.R.string.ok),
-            )
-            showChangelog = false
-        }
-    }
-
-    LaunchedEffect(noticeMessage) {
-        val msg = noticeMessage
-        if (msg != null) {
-            noticeDialog.showConfirm(
-                title = context.getString(R.string.kitsune_pi_clean_notice_title),
-                content = msg,
-                markdown = false,
-                confirm = context.getString(android.R.string.ok),
-            )
-            noticeMessage = null
-        }
+    LaunchedEffect(Unit) {
+        hiddenCount = com.sukisu.nova.folkpatch.KitsuneBankHideManager.getHiddenCount(context)
     }
 
     AppCard(
         modifier = modifier,
         colors = backgroundAwareCardColors(),
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(10.dp),
-        ) {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
-            ) {
+        ArrowPreference(
+            title = stringResource(R.string.kitsune_bank_hide_title),
+            summary = if (hiddenCount > 0) {
+                stringResource(R.string.kitsune_bank_protected_count, hiddenCount)
+            } else {
+                stringResource(R.string.kitsune_bank_hide_subtitle)
+            },
+            startAction = {
                 Icon(
-                    imageVector = Icons.Rounded.Security,
+                    androidx.compose.material.icons.Icons.Rounded.Security,
                     contentDescription = null,
-                    tint = colorScheme.primary,
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier.padding(end = 6.dp),
+                    tint = colorScheme.onBackground,
                 )
-                Column(modifier = Modifier.weight(1f)) {
-                    Text(
-                        text = stringResource(R.string.kitsune_card_update_title),
-                        fontWeight = FontWeight.Bold,
-                        style = MiuixTheme.textStyles.title4,
-                    )
-                    Text(
-                        text = stringResource(R.string.kitsune_card_update_subtitle),
-                        style = MiuixTheme.textStyles.body2,
-                        color = colorScheme.onSurfaceVariantSummary,
-                    )
-                }
-            }
-
-            Text(
-                text = stringResource(R.string.kitsune_card_update_desc),
-                style = MiuixTheme.textStyles.body2,
-                color = colorScheme.onSurfaceVariantSummary,
-            )
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-            ) {
-                TextButton(
-                    text = stringResource(R.string.kitsune_btn_pi_express),
-                    onClick = {
-                        if (isOptimizing) return@TextButton
-                        isOptimizing = true
-                        Toast.makeText(context, R.string.kitsune_pi_cleaning, Toast.LENGTH_SHORT).show()
-                        scope.launch {
-                            val (ok, _) = SafePlayIntegrityGuard.cleanGmsCacheAndOptimize(context)
-                            isOptimizing = false
-                            Toast.makeText(context, if (ok) R.string.kitsune_pi_clean_success else R.string.operation_failed, Toast.LENGTH_SHORT).show()
-                            noticeMessage = context.getString(R.string.kitsune_pi_clean_notice_msg)
-                        }
-                    },
-                    modifier = Modifier.weight(1f),
-                    colors = ButtonDefaults.textButtonColorsPrimary(),
-                )
-
-                TextButton(
-                    text = stringResource(R.string.kitsune_btn_changelog),
-                    onClick = { showChangelog = true },
-                    modifier = Modifier.weight(1f),
-                )
-            }
-        }
+            },
+            onClick = { navigator.push(com.sukisu.nova.ui.navigation3.Route.BankHide) },
+        )
     }
 }
 
@@ -876,7 +802,7 @@ private fun HomeScreenPreviewContent(
                 showFullStatus = true,
                 modifier = Modifier.fillMaxWidth(),
             )
-            KitsuneUpdateAndShieldCardMiuix(
+            KitsuneBankShieldHomeCardMiuix(
                 modifier = Modifier.fillMaxWidth(),
             )
         }

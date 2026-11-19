@@ -212,4 +212,8 @@ sealed interface Route : NavKey, Parcelable {
     @Parcelize
     @Serializable
     data class FolkPatchSettings(val initialCategory: String? = null) : Route
+
+    @Parcelize
+    @Serializable
+    data object BankHide : Route
 }

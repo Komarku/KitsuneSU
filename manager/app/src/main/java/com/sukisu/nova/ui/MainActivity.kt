@@ -9,6 +9,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
@@ -185,6 +187,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         com.sukisu.nova.folkpatch.FolkPatchPrefs.init(this)
         com.sukisu.nova.folkpatch.FolkPatchSoundPlayer.playStartupIfEnabled(this)
+        lifecycleScope.launch(Dispatchers.IO) {
+            com.sukisu.nova.folkpatch.KitsuneBankHideManager.applyAllOnStartup(this@MainActivity)
+        }
         if (ThemeTrialManager.isActive(this)) {
             ViewModelProvider(this)[SettingsViewModel::class.java]
                 .restoreThemeTrial(this, taskId)
@@ -472,6 +477,9 @@ class MainActivity : ComponentActivity() {
                                     com.sukisu.nova.folkpatch.ui.FolkPatchUnifiedSettingsScreen(
                                         initialCategory = key.initialCategory,
                                     )
+                                }
+                                entry<Route.BankHide>(swipeDismiss = swipeDismiss) {
+                                    com.sukisu.nova.folkpatch.ui.KitsuneBankHideScreen()
                                 }
                         }
                     }
