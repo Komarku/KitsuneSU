@@ -203,4 +203,33 @@
     <string name="dynamic_manager_enabled">Динамические менеджеры включены</string>
     <string name="dynamic_manager_add">Добавить менеджер</string>
     <string name="dynamic_manager_remove">Удалить менеджер</string>
+
+    <!-- Кастомизация плашки статуса («Работает») -->
+    <string name="kitsune_customize_status_card_title">Кастомизация плашки статуса</string>
+    <string name="kitsune_customize_status_card_desc">Формы Material 3, иконка с галочкой, декоративные фигуры и свечение</string>
+    <string name="kitsune_status_card_shape_title">Форма плашки</string>
+    <string name="kitsune_status_card_icon_title">Иконка статуса / Галочка</string>
+    <string name="kitsune_status_card_deco_title">Фигуры Material 3 (Декорации)</string>
+    <string name="kitsune_shape_hero">Hero Expressive (Стандартная M3)</string>
+    <string name="kitsune_shape_squircle">Сквиркл (Squircle)</string>
+    <string name="kitsune_shape_cut_corner">Вырезанные углы (Киберпанк)</string>
+    <string name="kitsune_shape_pill">Капсула (Pill)</string>
+    <string name="kitsune_shape_asymmetric">Асимметричная (Expressive)</string>
+    <string name="kitsune_icon_check_circle">Галочка в круге (CheckCircle)</string>
+    <string name="kitsune_icon_verified">Звезда с галочкой (Verified)</string>
+    <string name="kitsune_icon_shield">Щит безопасности (Security)</string>
+    <string name="kitsune_icon_kitsune">Лиса Kitsune (Fox)</string>
+    <string name="kitsune_icon_star">Искры M3 (Sparkle)</string>
+    <string name="kitsune_icon_none">Без иконки</string>
+    <string name="kitsune_deco_m3_shapes">Фигуры Material 3 (Pill &amp; Gems)</string>
+    <string name="kitsune_deco_sparkles">Звёзды и искры M3</string>
+    <string name="kitsune_deco_rings">Пульсирующие кольца</string>
+    <string name="kitsune_deco_polygons">Плавающие полигоны</string>
+    <string name="kitsune_deco_minimal">Минимализм (без фигур)</string>
+    <string name="kitsune_show_badge_title">Показывать бейдж статуса</string>
+    <string name="kitsune_show_badge_desc">Отображает стильный бейдж рядом с надписью «Работает»</string>
+    <string name="kitsune_badge_text_label">Текст на бейдже</string>
+    <string name="kitsune_glow_title">Неоновое свечение и контур</string>
+    <string name="kitsune_glow_desc">Добавляет выразительный контур с эффектом свечения</string>
+    <string name="kitsune_preview">Предпросмотр</string>
 </resources>

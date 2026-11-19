@@ -48,13 +48,19 @@ if [ ! -f kernel ]; then
 echo "- Unpacking boot image"
 
 set -x
-./kptools unpack "$BOOTIMAGE" "$@"
+./kptools unpack "$BOOTIMAGE"
 patch_rc=$?
 set +x
   if [ $patch_rc -ne 0 ]; then
     >&2 echo "- Unpack error: $patch_rc"
     exit $patch_rc
   fi
+fi
+
+if [ ! -f kernel ]; then
+  >&2 echo "- Error: No kernel found in unpacked image!"
+  >&2 echo "- Did you select init_boot.img? KernelPatch requires boot.img with kernel!"
+  exit 1
 fi
 
 kallsyms_out=$(./kptools -i kernel -f 2>&1)

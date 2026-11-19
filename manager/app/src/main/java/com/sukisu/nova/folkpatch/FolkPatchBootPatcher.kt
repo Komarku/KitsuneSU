@@ -243,6 +243,13 @@ object FolkPatchBootPatcher {
             return@withContext FolkKImgInfo(banner = "Unpack failed", patched = false) to fileName
         }
 
+        val kernelFile = File(patchDir, "kernel")
+        if (!kernelFile.exists() || kernelFile.length() == 0L) {
+            onLog("! Предупреждение: в образе отсутствует ядро (kernel).")
+            onLog("! Возможно, вы выбрали generic ramdisk (init_boot.img). Для KernelPatch требуется образ boot.img с ядром.")
+            return@withContext FolkKImgInfo(banner = "Ошибка: generic ramdisk (init_boot.img без ядра). Выберите boot.img", patched = false) to fileName
+        }
+
         val listRes = sh.newJob()
             .add("cd \"${patchDir.absolutePath}\" && ./kptools -l -i kernel")
             .to(ArrayList(), ArrayList())
@@ -382,6 +389,10 @@ object FolkPatchBootPatcher {
                         SLOT=$(getprop ro.boot.slot_suffix)
                     fi
                     BOOTIMAGE=$(find_block boot${'$'}SLOT)
+                    [ -z "${'$'}BOOTIMAGE" ] && BOOTIMAGE=$(find_block boot_a boot lnx bootimg kernel)
+                    [ -z "${'$'}BOOTIMAGE" ] && [ -b "/dev/block/by-name/boot${'$'}SLOT" ] && BOOTIMAGE="/dev/block/by-name/boot${'$'}SLOT"
+                    [ -z "${'$'}BOOTIMAGE" ] && [ -b "/dev/block/bootdevice/by-name/boot${'$'}SLOT" ] && BOOTIMAGE="/dev/block/bootdevice/by-name/boot${'$'}SLOT"
+                    [ -z "${'$'}BOOTIMAGE" ] && BOOTIMAGE=$(grep -v '#' /etc/*fstab* 2>/dev/null | grep -E '/boot(img)?[^a-zA-Z]' | grep -oE '/dev/[a-zA-Z0-9_./-]*' | head -n 1)
                     echo "KITSUNE_BOOT_DEV=${'$'}BOOTIMAGE"
                 """.trimIndent()
                 val findOut = ArrayList<String>()
@@ -411,6 +422,10 @@ object FolkPatchBootPatcher {
                     . ./util_functions.sh
                     SLOT=$(getprop ro.boot.slot_suffix)
                     BOOTIMAGE=$(find_block boot${'$'}SLOT)
+                    [ -z "${'$'}BOOTIMAGE" ] && BOOTIMAGE=$(find_block boot_a boot lnx bootimg kernel)
+                    [ -z "${'$'}BOOTIMAGE" ] && [ -b "/dev/block/by-name/boot${'$'}SLOT" ] && BOOTIMAGE="/dev/block/by-name/boot${'$'}SLOT"
+                    [ -z "${'$'}BOOTIMAGE" ] && [ -b "/dev/block/bootdevice/by-name/boot${'$'}SLOT" ] && BOOTIMAGE="/dev/block/bootdevice/by-name/boot${'$'}SLOT"
+                    [ -z "${'$'}BOOTIMAGE" ] && BOOTIMAGE=$(grep -v '#' /etc/*fstab* 2>/dev/null | grep -E '/boot(img)?[^a-zA-Z]' | grep -oE '/dev/[a-zA-Z0-9_./-]*' | head -n 1)
                     echo "KITSUNE_BOOT_DEV=${'$'}BOOTIMAGE"
                 """.trimIndent()
                 val findOut = ArrayList<String>()

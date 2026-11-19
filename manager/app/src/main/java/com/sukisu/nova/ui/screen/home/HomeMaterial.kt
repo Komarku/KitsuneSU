@@ -27,6 +27,19 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.geometry.Size
+import androidx.compose.material.icons.rounded.Tune
+import androidx.compose.runtime.collectAsState
+import com.sukisu.nova.folkpatch.FolkPatchPrefs
+import com.sukisu.nova.folkpatch.StatusCardDecoration
+import com.sukisu.nova.folkpatch.StatusCardShape
+import com.sukisu.nova.folkpatch.StatusCardIcon
+import com.sukisu.nova.folkpatch.ui.StatusCardCustomizerDialog
+import com.sukisu.nova.folkpatch.ui.getStatusCardShape
+import com.sukisu.nova.folkpatch.ui.getStatusCardVector
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.VolunteerActivism
@@ -307,9 +320,32 @@ private fun ActiveStatusCard(
     state: HomeUiState,
     onClick: () -> Unit,
 ) {
+    val folkState by FolkPatchPrefs.state.collectAsState()
+    var showCustomizer by remember { mutableStateOf(false) }
+
+    if (showCustomizer) {
+        StatusCardCustomizerDialog(
+            onDismiss = { showCustomizer = false }
+        )
+    }
+
     val containerColor = backgroundAwareColor(MaterialTheme.colorScheme.primary)
     val contentColor = MaterialTheme.colorScheme.onPrimary
     val workingMode = state.workingModeLabel
+
+    val cardShape = getStatusCardShape(folkState.statusCardShape)
+    val cardBorder = if (folkState.statusCardGlow) {
+        BorderStroke(
+            1.5.dp,
+            Brush.horizontalGradient(
+                listOf(
+                    contentColor.copy(alpha = 0.65f),
+                    contentColor.copy(alpha = 0.20f),
+                    contentColor.copy(alpha = 0.50f),
+                )
+            )
+        )
+    } else null
 
     val cardImagePainter = state.homeCardImagePath.takeIf { it.isNotEmpty() }?.let { path ->
         rememberAsyncImagePainter(
@@ -325,7 +361,7 @@ private fun ActiveStatusCard(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .clip(HeroShape)
+            .clip(cardShape)
             .then(
                 if (cardImagePainter != null) {
                     Modifier.drawPainterCover(cardImagePainter)
@@ -335,14 +371,24 @@ private fun ActiveStatusCard(
             ),
         color = if (cardImagePainter != null) Color.Transparent else containerColor,
         contentColor = contentColor,
-        shape = HeroShape,
+        shape = cardShape,
+        border = cardBorder,
         onClick = onClick,
     ) {
         BoxWithConstraints(
             modifier = if (hideCardDecoration) {
                 Modifier
             } else {
-                Modifier.drawBehind { drawStatusRings(contentColor.copy(alpha = 0.18f)) }
+                Modifier.drawBehind {
+                    val decoColor = contentColor.copy(alpha = 0.18f)
+                    when (folkState.statusCardDecoration) {
+                        StatusCardDecoration.RINGS -> drawStatusRings(decoColor)
+                        StatusCardDecoration.M3_SHAPES -> drawMaterial3ExpressiveShapes(decoColor)
+                        StatusCardDecoration.SPARKLES -> drawM3Sparkles(decoColor)
+                        StatusCardDecoration.FLOATING_POLYGONS -> drawFloatingPolygons(decoColor)
+                        StatusCardDecoration.MINIMAL -> { /* clean */ }
+                    }
+                }
             }
         ) {
             Column(
@@ -352,46 +398,95 @@ private fun ActiveStatusCard(
                     .padding(22.dp),
                 verticalArrangement = Arrangement.SpaceBetween,
             ) {
-                FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(8.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.Top,
                 ) {
-                    if (workingMode.isNotEmpty()) {
-                        StatusTag(
-                            label = workingMode,
-                            contentColor = containerColor,
-                            backgroundColor = contentColor,
-                        )
+                    FlowRow(
+                        modifier = Modifier.weight(1f),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                    ) {
+                        if (workingMode.isNotEmpty()) {
+                            StatusTag(
+                                label = workingMode,
+                                contentColor = containerColor,
+                                backgroundColor = contentColor,
+                            )
+                        }
+                        if (state.showCustomLkmBadge) {
+                            StatusTag(
+                                label = customText(CustomTextKey.HOME_TAG_LKM),
+                                contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
+                                backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
+                            )
+                        }
+                        if (state.isSafeMode) {
+                            StatusTag(
+                                label = customText(CustomTextKey.HOME_TAG_SAFEMODE),
+                                contentColor = MaterialTheme.colorScheme.onErrorContainer,
+                                backgroundColor = MaterialTheme.colorScheme.errorContainer,
+                            )
+                        }
+                        if (state.isLateLoadMode) {
+                            StatusTag(
+                                label = stringResource(id = R.string.jailbreak_mode),
+                                contentColor = MaterialTheme.colorScheme.onErrorContainer,
+                                backgroundColor = MaterialTheme.colorScheme.errorContainer,
+                            )
+                        }
                     }
-                    if (state.showCustomLkmBadge) {
-                        StatusTag(
-                            label = customText(CustomTextKey.HOME_TAG_LKM),
-                            contentColor = MaterialTheme.colorScheme.onTertiaryContainer,
-                            backgroundColor = MaterialTheme.colorScheme.tertiaryContainer,
-                        )
-                    }
-                    if (state.isSafeMode) {
-                        StatusTag(
-                            label = customText(CustomTextKey.HOME_TAG_SAFEMODE),
-                            contentColor = MaterialTheme.colorScheme.onErrorContainer,
-                            backgroundColor = MaterialTheme.colorScheme.errorContainer,
-                        )
-                    }
-                    if (state.isLateLoadMode) {
-                        StatusTag(
-                            label = stringResource(id = R.string.jailbreak_mode),
-                            contentColor = MaterialTheme.colorScheme.onErrorContainer,
-                            backgroundColor = MaterialTheme.colorScheme.errorContainer,
+
+                    IconButton(
+                        onClick = { showCustomizer = true },
+                        modifier = Modifier.size(32.dp),
+                    ) {
+                        Icon(
+                            Icons.Rounded.Tune,
+                            contentDescription = stringResource(R.string.kitsune_customize_status_card_title),
+                            tint = contentColor.copy(alpha = 0.85f),
+                            modifier = Modifier.size(18.dp),
                         )
                     }
                 }
+
                 Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     if (!(state.homeCardImagePath.isNotEmpty() && state.hideHomeCardStatusText)) {
-                        Text(
-                            text = customText(CustomTextKey.HOME_STATUS_WORKING),
-                            style = MaterialTheme.typography.displaySmall,
-                            fontWeight = FontWeight.Black,
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                        ) {
+                            Text(
+                                text = customText(CustomTextKey.HOME_STATUS_WORKING),
+                                style = MaterialTheme.typography.displaySmall,
+                                fontWeight = FontWeight.Black,
+                            )
+                            val statusIcon = getStatusCardVector(folkState.statusCardIcon)
+                            if (statusIcon != null) {
+                                Icon(
+                                    imageVector = statusIcon,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(28.dp),
+                                    tint = contentColor,
+                                )
+                            }
+                            if (folkState.statusCardShowBadge) {
+                                Surface(
+                                    shape = RoundedCornerShape(50),
+                                    color = contentColor.copy(alpha = 0.22f),
+                                    border = BorderStroke(1.dp, contentColor.copy(alpha = 0.45f)),
+                                ) {
+                                    Text(
+                                        text = folkState.statusCardBadgeText.ifBlank { "ВКЛЮЧЕНО" },
+                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 3.dp),
+                                        style = MaterialTheme.typography.labelSmall,
+                                        fontWeight = FontWeight.Black,
+                                        color = contentColor,
+                                    )
+                                }
+                            }
+                        }
                         Text(
                             text = stringResource(R.string.home_working_version, "${state.ksuVersion}-${state.kernelUAPIVersion}"),
                             style = MaterialTheme.typography.bodyMedium,
@@ -489,6 +584,95 @@ private fun DrawScope.drawStatusRings(color: Color) {
     )
     drawCircle(color = color, radius = 56.dp.toPx(), center = center, style = Stroke(stroke))
     drawCircle(color = color, radius = 18.dp.toPx(), center = center)
+}
+
+private fun DrawScope.drawMaterial3ExpressiveShapes(color: Color) {
+    val w = size.width
+    val h = size.height
+
+    // 1. M3 Pill capsule shape at top-right
+    val pillWidth = 92.dp.toPx()
+    val pillHeight = 44.dp.toPx()
+    drawRoundRect(
+        color = color,
+        topLeft = Offset(w - pillWidth - 18.dp.toPx(), 18.dp.toPx()),
+        size = Size(pillWidth, pillHeight),
+        cornerRadius = CornerRadius(pillHeight / 2, pillHeight / 2),
+        style = Stroke(2.dp.toPx()),
+    )
+    drawRoundRect(
+        color = color.copy(alpha = color.alpha * 0.45f),
+        topLeft = Offset(w - pillWidth - 14.dp.toPx(), 22.dp.toPx()),
+        size = Size(pillWidth - 8.dp.toPx(), pillHeight - 8.dp.toPx()),
+        cornerRadius = CornerRadius((pillHeight - 8.dp.toPx()) / 2, (pillHeight - 8.dp.toPx()) / 2),
+    )
+
+    // 2. 4-point M3 Diamond / Star
+    val starCenter = Offset(w - 62.dp.toPx(), h - 52.dp.toPx())
+    val starRadius = 26.dp.toPx()
+    val path = Path().apply {
+        moveTo(starCenter.x, starCenter.y - starRadius)
+        quadraticTo(starCenter.x, starCenter.y, starCenter.x + starRadius, starCenter.y)
+        quadraticTo(starCenter.x, starCenter.y, starCenter.x, starCenter.y + starRadius)
+        quadraticTo(starCenter.x, starCenter.y, starCenter.x - starRadius, starCenter.y)
+        quadraticTo(starCenter.x, starCenter.y, starCenter.x, starCenter.y - starRadius)
+        close()
+    }
+    drawPath(path, color)
+
+    // 3. Floating M3 Circle accents
+    drawCircle(
+        color = color.copy(alpha = color.alpha * 0.5f),
+        radius = 14.dp.toPx(),
+        center = Offset(w - 128.dp.toPx(), 40.dp.toPx()),
+    )
+    drawCircle(
+        color = color,
+        radius = 6.dp.toPx(),
+        center = Offset(w - 142.dp.toPx(), 68.dp.toPx()),
+    )
+}
+
+private fun DrawScope.drawM3Sparkles(color: Color) {
+    val w = size.width
+    val h = size.height
+
+    fun drawSparkle(center: Offset, r: Float) {
+        val p = Path().apply {
+            moveTo(center.x, center.y - r)
+            quadraticTo(center.x, center.y, center.x + r, center.y)
+            quadraticTo(center.x, center.y, center.x, center.y + r)
+            quadraticTo(center.x, center.y, center.x - r, center.y)
+            quadraticTo(center.x, center.y, center.x, center.y - r)
+            close()
+        }
+        drawPath(p, color)
+    }
+
+    drawSparkle(Offset(w - 45.dp.toPx(), 35.dp.toPx()), 28.dp.toPx())
+    drawSparkle(Offset(w - 95.dp.toPx(), 65.dp.toPx()), 16.dp.toPx())
+    drawSparkle(Offset(w - 42.dp.toPx(), h - 45.dp.toPx()), 20.dp.toPx())
+    drawSparkle(Offset(w - 130.dp.toPx(), 30.dp.toPx()), 10.dp.toPx())
+    drawCircle(color = color, radius = 3.dp.toPx(), center = Offset(w - 75.dp.toPx(), 30.dp.toPx()))
+    drawCircle(color = color, radius = 4.dp.toPx(), center = Offset(w - 70.dp.toPx(), h - 55.dp.toPx()))
+}
+
+private fun DrawScope.drawFloatingPolygons(color: Color) {
+    val w = size.width
+    val stroke = 2.dp.toPx()
+    val center = Offset(w - 50.dp.toPx(), 50.dp.toPx())
+    val r = 40.dp.toPx()
+    val poly = Path().apply {
+        for (i in 0 until 6) {
+            val angle = Math.toRadians((i * 60 - 30).toDouble())
+            val x = center.x + (r * Math.cos(angle)).toFloat()
+            val y = center.y + (r * Math.sin(angle)).toFloat()
+            if (i == 0) moveTo(x, y) else lineTo(x, y)
+        }
+        close()
+    }
+    drawPath(poly, color, style = Stroke(stroke))
+    drawCircle(color = color.copy(alpha = color.alpha * 0.4f), radius = 20.dp.toPx(), center = center)
 }
 
 private fun DrawScope.drawDashedBorder(color: Color) {

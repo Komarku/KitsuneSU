@@ -217,6 +217,13 @@ fun SettingPagerMiuix(
                     val kitsuneCtx = androidx.compose.ui.platform.LocalContext.current
                     val kitsuneScope = androidx.compose.runtime.rememberCoroutineScope()
                     var bootloopGuardEnabled by remember { mutableStateOf(com.sukisu.nova.folkpatch.KitsuneBootloopGuard.isEnabled(kitsuneCtx)) }
+                    var showStatusCardCustomizer by remember { mutableStateOf(false) }
+
+                    if (showStatusCardCustomizer) {
+                        com.sukisu.nova.folkpatch.ui.StatusCardCustomizerDialog(
+                            onDismiss = { showStatusCardCustomizer = false }
+                        )
+                    }
                     AppCard(
                         modifier = Modifier
                             .bringIntoViewRequester(requester(SettingsSection.GENERAL))
@@ -272,6 +279,19 @@ fun SettingPagerMiuix(
                                 )
                             },
                             onClick = actions.onOpenTheme
+                        )
+                        ArrowPreference(
+                            title = stringResource(R.string.kitsune_customize_status_card_title),
+                            summary = stringResource(R.string.kitsune_customize_status_card_desc),
+                            startAction = {
+                                Icon(
+                                    Icons.Rounded.Tune,
+                                    modifier = Modifier.padding(end = 6.dp),
+                                    contentDescription = stringResource(R.string.kitsune_customize_status_card_title),
+                                    tint = colorScheme.onBackground
+                                )
+                            },
+                            onClick = { showStatusCardCustomizer = true }
                         )
                         val themeStoreTitle = customText(CustomTextKey.PAGE_THEME_STORE)
                         ArrowPreference(

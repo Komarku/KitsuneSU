@@ -44,6 +44,46 @@ enum class FloatingBarStyle(val id: Int, val key: String) {
     }
 }
 
+enum class StatusCardShape(val id: Int, val label: String) {
+    HERO(0, "Hero (M3 Expressive)"),
+    SQUIRCLE(1, "Сквиркл (Squircle)"),
+    CUT_CORNER(2, "Вырезанные углы (Cut-Corner)"),
+    PILL(3, "Капсула (Pill)"),
+    ASYMMETRIC(4, "Асимметричная (Asymmetric)"),
+    ;
+
+    companion object {
+        fun fromId(id: Int): StatusCardShape = entries.firstOrNull { it.id == id } ?: HERO
+    }
+}
+
+enum class StatusCardIcon(val id: Int, val label: String) {
+    CHECK_CIRCLE(0, "Галочка в круге (CheckCircle)"),
+    VERIFIED(1, "Звезда с галочкой (Verified)"),
+    SHIELD(2, "Щит защиты (Security)"),
+    KITSUNE(3, "Лиса Kitsune (Fox)"),
+    STAR(4, "Искры M3 (Sparkle)"),
+    NONE(5, "Без иконки"),
+    ;
+
+    companion object {
+        fun fromId(id: Int): StatusCardIcon = entries.firstOrNull { it.id == id } ?: CHECK_CIRCLE
+    }
+}
+
+enum class StatusCardDecoration(val id: Int, val label: String) {
+    M3_SHAPES(0, "Фигуры Material 3 (Pill & Gems)"),
+    SPARKLES(1, "Звёзды и искры M3"),
+    RINGS(2, "Пульсирующие кольца"),
+    FLOATING_POLYGONS(3, "Плавающие полигоны"),
+    MINIMAL(4, "Минимализм"),
+    ;
+
+    companion object {
+        fun fromId(id: Int): StatusCardDecoration = entries.firstOrNull { it.id == id } ?: M3_SHAPES
+    }
+}
+
 @Immutable
 data class FolkPatchSettingsState(
     // === Root Engine & General (FolkPatch 1-to-1) ===
@@ -84,6 +124,14 @@ data class FolkPatchSettingsState(
     val gridCardHideCheck: Boolean = false,
     val gridCardHideText: Boolean = false,
     val gridCardHideMode: Boolean = false,
+
+    // === Status Card Customization (Кастомизация плашки статуса) ===
+    val statusCardShape: StatusCardShape = StatusCardShape.HERO,
+    val statusCardIcon: StatusCardIcon = StatusCardIcon.CHECK_CIRCLE,
+    val statusCardDecoration: StatusCardDecoration = StatusCardDecoration.M3_SHAPES,
+    val statusCardShowBadge: Boolean = true,
+    val statusCardBadgeText: String = "ВКЛЮЧЕНО",
+    val statusCardGlow: Boolean = true,
 
     // === Security (FolkPatch 1-to-1) ===
     val biometricAppLock: Boolean = false,
@@ -168,6 +216,13 @@ object FolkPatchPrefs {
             gridCardHideText = sp.getBoolean("grid_card_hide_text", false),
             gridCardHideMode = sp.getBoolean("grid_card_hide_mode", false),
 
+            statusCardShape = StatusCardShape.fromId(sp.getInt("status_card_shape", 0)),
+            statusCardIcon = StatusCardIcon.fromId(sp.getInt("status_card_icon", 0)),
+            statusCardDecoration = StatusCardDecoration.fromId(sp.getInt("status_card_decoration", 0)),
+            statusCardShowBadge = sp.getBoolean("status_card_show_badge", true),
+            statusCardBadgeText = sp.getString("status_card_badge_text", "ВКЛЮЧЕНО") ?: "ВКЛЮЧЕНО",
+            statusCardGlow = sp.getBoolean("status_card_glow", true),
+
             biometricAppLock = sp.getBoolean("biometric_app_lock", false),
             hideAppDisguise = sp.getBoolean("hide_app_disguise", false),
             pathHideEnabled = sp.getBoolean("path_hide_enabled", false),
@@ -226,6 +281,13 @@ object FolkPatchPrefs {
             putBoolean("grid_card_hide_check", next.gridCardHideCheck)
             putBoolean("grid_card_hide_text", next.gridCardHideText)
             putBoolean("grid_card_hide_mode", next.gridCardHideMode)
+
+            putInt("status_card_shape", next.statusCardShape.id)
+            putInt("status_card_icon", next.statusCardIcon.id)
+            putInt("status_card_decoration", next.statusCardDecoration.id)
+            putBoolean("status_card_show_badge", next.statusCardShowBadge)
+            putString("status_card_badge_text", next.statusCardBadgeText)
+            putBoolean("status_card_glow", next.statusCardGlow)
 
             putBoolean("biometric_app_lock", next.biometricAppLock)
             putBoolean("hide_app_disguise", next.hideAppDisguise)
@@ -291,6 +353,12 @@ object FolkPatchPrefs {
         obj.put("grid_card_hide_check", s.gridCardHideCheck)
         obj.put("grid_card_hide_text", s.gridCardHideText)
         obj.put("grid_card_hide_mode", s.gridCardHideMode)
+        obj.put("status_card_shape", s.statusCardShape.id)
+        obj.put("status_card_icon", s.statusCardIcon.id)
+        obj.put("status_card_decoration", s.statusCardDecoration.id)
+        obj.put("status_card_show_badge", s.statusCardShowBadge)
+        obj.put("status_card_badge_text", s.statusCardBadgeText)
+        obj.put("status_card_glow", s.statusCardGlow)
         obj.put("biometric_app_lock", s.biometricAppLock)
         obj.put("hide_app_disguise", s.hideAppDisguise)
         obj.put("path_hide_enabled", s.pathHideEnabled)
@@ -343,6 +411,12 @@ object FolkPatchPrefs {
                     gridCardHideCheck = obj.optBoolean("grid_card_hide_check", cur.gridCardHideCheck),
                     gridCardHideText = obj.optBoolean("grid_card_hide_text", cur.gridCardHideText),
                     gridCardHideMode = obj.optBoolean("grid_card_hide_mode", cur.gridCardHideMode),
+                    statusCardShape = StatusCardShape.fromId(obj.optInt("status_card_shape", cur.statusCardShape.id)),
+                    statusCardIcon = StatusCardIcon.fromId(obj.optInt("status_card_icon", cur.statusCardIcon.id)),
+                    statusCardDecoration = StatusCardDecoration.fromId(obj.optInt("status_card_decoration", cur.statusCardDecoration.id)),
+                    statusCardShowBadge = obj.optBoolean("status_card_show_badge", cur.statusCardShowBadge),
+                    statusCardBadgeText = obj.optString("status_card_badge_text", cur.statusCardBadgeText),
+                    statusCardGlow = obj.optBoolean("status_card_glow", cur.statusCardGlow),
                     biometricAppLock = obj.optBoolean("biometric_app_lock", cur.biometricAppLock),
                     hideAppDisguise = obj.optBoolean("hide_app_disguise", cur.hideAppDisguise),
                     pathHideEnabled = obj.optBoolean("path_hide_enabled", cur.pathHideEnabled),

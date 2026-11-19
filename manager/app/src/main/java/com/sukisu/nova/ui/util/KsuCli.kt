@@ -694,11 +694,13 @@ suspend fun isAbDevice(): Boolean = withContext(Dispatchers.IO) {
 
 suspend fun getDefaultPartition(): String = withContext(Dispatchers.IO) {
     val shell = getRootShell()
+    val fallback = if (!Os.uname().release.contains("android12-")) "init_boot" else "boot"
     if (shell.isRoot) {
         val cmd = "boot-info default-partition"
-        ShellUtils.fastCmd(shell, "${getKsuDaemonPath()} $cmd").trim()
+        val p = ShellUtils.fastCmd(shell, "${getKsuDaemonPath()} $cmd").trim()
+        if (p.isNotBlank()) p else fallback
     } else {
-        if (!Os.uname().release.contains("android12-")) "init_boot" else "boot"
+        fallback
     }
 }
 

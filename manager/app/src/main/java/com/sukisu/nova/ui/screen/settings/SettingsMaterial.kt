@@ -180,6 +180,13 @@ fun SettingPagerMaterial(
             val kitsuneCtx = androidx.compose.ui.platform.LocalContext.current
             val kitsuneScope = androidx.compose.runtime.rememberCoroutineScope()
             var bootloopGuardEnabled by remember { mutableStateOf(com.sukisu.nova.folkpatch.KitsuneBootloopGuard.isEnabled(kitsuneCtx)) }
+            var showStatusCardCustomizer by remember { mutableStateOf(false) }
+
+            if (showStatusCardCustomizer) {
+                com.sukisu.nova.folkpatch.ui.StatusCardCustomizerDialog(
+                    onDismiss = { showStatusCardCustomizer = false }
+                )
+            }
             SettingsAnchor(SettingsSection.GENERAL, anchorRequesters) {
             SegmentedColumn(
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 13.dp),
@@ -216,6 +223,20 @@ fun SettingPagerMaterial(
                             headlineContent = { Text(themeTitle) },
                             supportingContent = { Text(stringResource(id = R.string.settings_theme_summary)) },
                             leadingContent = { IconTile(Icons.Filled.Palette, themeTitle) },
+                            trailingContent = {
+                                Icon(
+                                    Icons.AutoMirrored.Filled.KeyboardArrowRight,
+                                    null
+                                )
+                            }
+                        )
+                    }
+                    add {
+                        SegmentedListItem(
+                            onClick = { showStatusCardCustomizer = true },
+                            headlineContent = { Text(stringResource(R.string.kitsune_customize_status_card_title)) },
+                            supportingContent = { Text(stringResource(R.string.kitsune_customize_status_card_desc)) },
+                            leadingContent = { IconTile(Icons.Rounded.Tune, stringResource(R.string.kitsune_customize_status_card_title)) },
                             trailingContent = {
                                 Icon(
                                     Icons.AutoMirrored.Filled.KeyboardArrowRight,

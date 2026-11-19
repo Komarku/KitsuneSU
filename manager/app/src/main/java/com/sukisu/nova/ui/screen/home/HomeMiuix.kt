@@ -28,6 +28,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.material.icons.rounded.Tune
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.collectAsState
+import com.sukisu.nova.folkpatch.FolkPatchPrefs
+import com.sukisu.nova.folkpatch.ui.StatusCardCustomizerDialog
+import com.sukisu.nova.folkpatch.ui.getStatusCardShape
+import com.sukisu.nova.folkpatch.ui.getStatusCardVector
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.MenuBook
 import androidx.compose.material.icons.filled.VolunteerActivism
@@ -327,6 +336,15 @@ private fun ActiveStatusCard(
     state: HomeUiState,
     onClick: () -> Unit,
 ) {
+    val folkState by FolkPatchPrefs.state.collectAsState()
+    var showCustomizer by remember { mutableStateOf(false) }
+
+    if (showCustomizer) {
+        StatusCardCustomizerDialog(
+            onDismiss = { showCustomizer = false }
+        )
+    }
+
     val isDark = isInDarkTheme()
     val accentColor = if (isDynamicColor) colorScheme.primary else Color(0xFF36D167)
     val tagBackground = when {
@@ -398,46 +416,95 @@ private fun ActiveStatusCard(
                     .padding(22.dp),
                 verticalArrangement = Arrangement.SpaceBetween,
             ) {
-                FlowRow(
-                    horizontalArrangement = Arrangement.spacedBy(6.dp),
-                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.Top,
                 ) {
-                    if (workingMode != null) {
-                        StatusTag(
-                            label = workingMode,
-                            contentColor = if (isDynamicColor) colorScheme.onPrimary else Color.White,
-                            backgroundColor = accentColor,
-                        )
+                    FlowRow(
+                        modifier = Modifier.weight(1f),
+                        horizontalArrangement = Arrangement.spacedBy(6.dp),
+                        verticalArrangement = Arrangement.spacedBy(6.dp),
+                    ) {
+                        if (workingMode != null) {
+                            StatusTag(
+                                label = workingMode,
+                                contentColor = if (isDynamicColor) colorScheme.onPrimary else Color.White,
+                                backgroundColor = accentColor,
+                            )
+                        }
+                        if (state.showCustomLkmBadge) {
+                            StatusTag(
+                                label = customText(CustomTextKey.HOME_TAG_LKM),
+                                contentColor = tagContent,
+                                backgroundColor = tagBackground,
+                            )
+                        }
+                        if (state.isSafeMode) {
+                            StatusTag(
+                                label = customText(CustomTextKey.HOME_TAG_SAFEMODE),
+                                contentColor = colorScheme.onErrorContainer,
+                                backgroundColor = colorScheme.errorContainer,
+                            )
+                        }
+                        if (state.isLateLoadMode) {
+                            StatusTag(
+                                label = stringResource(id = R.string.jailbreak_mode),
+                                contentColor = colorScheme.onErrorContainer,
+                                backgroundColor = colorScheme.errorContainer,
+                            )
+                        }
                     }
-                    if (state.showCustomLkmBadge) {
-                        StatusTag(
-                            label = customText(CustomTextKey.HOME_TAG_LKM),
-                            contentColor = tagContent,
-                            backgroundColor = tagBackground,
-                        )
-                    }
-                    if (state.isSafeMode) {
-                        StatusTag(
-                            label = customText(CustomTextKey.HOME_TAG_SAFEMODE),
-                            contentColor = colorScheme.onErrorContainer,
-                            backgroundColor = colorScheme.errorContainer,
-                        )
-                    }
-                    if (state.isLateLoadMode) {
-                        StatusTag(
-                            label = stringResource(id = R.string.jailbreak_mode),
-                            contentColor = colorScheme.onErrorContainer,
-                            backgroundColor = colorScheme.errorContainer,
+
+                    IconButton(
+                        onClick = { showCustomizer = true },
+                        modifier = Modifier.size(32.dp),
+                    ) {
+                        Icon(
+                            Icons.Rounded.Tune,
+                            contentDescription = stringResource(R.string.kitsune_customize_status_card_title),
+                            tint = colorScheme.onBackground.copy(alpha = 0.75f),
+                            modifier = Modifier.size(18.dp),
                         )
                     }
                 }
+
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     if (!(state.homeCardImagePath.isNotEmpty() && state.hideHomeCardStatusText)) {
-                        Text(
-                            text = customText(CustomTextKey.HOME_STATUS_WORKING),
-                            fontSize = 36.sp,
-                            fontWeight = FontWeight.Bold,
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp),
+                        ) {
+                            Text(
+                                text = customText(CustomTextKey.HOME_STATUS_WORKING),
+                                fontSize = 36.sp,
+                                fontWeight = FontWeight.Bold,
+                            )
+                            val ic = getStatusCardVector(folkState.statusCardIcon)
+                            if (ic != null) {
+                                Icon(
+                                    imageVector = ic,
+                                    contentDescription = null,
+                                    modifier = Modifier.size(28.dp),
+                                    tint = accentColor,
+                                )
+                            }
+                            if (folkState.statusCardShowBadge) {
+                                Surface(
+                                    shape = RoundedCornerShape(50),
+                                    color = accentColor.copy(alpha = 0.20f),
+                                    border = BorderStroke(1.dp, accentColor.copy(alpha = 0.45f)),
+                                ) {
+                                    Text(
+                                        text = folkState.statusCardBadgeText.ifBlank { "ВКЛЮЧЕНО" },
+                                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                                        fontSize = 11.sp,
+                                        fontWeight = FontWeight.ExtraBold,
+                                        color = accentColor,
+                                    )
+                                }
+                            }
+                        }
                         Text(
                             text = stringResource(
                                 R.string.home_working_version,

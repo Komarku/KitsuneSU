@@ -196,4 +196,33 @@
     <string name="kitsune_bootloop_rescued_message">Module «%1$s» caused a boot failure and was automatically disabled by Kitsune Bootloop Guard. Your system has been successfully rescued.</string>
     <string name="kitsune_bootloop_rescued_all_message">A critical boot failure was detected. All modules were temporarily disabled by Kitsune Bootloop Guard to restore system stability.</string>
     <string name="kitsune_home_patch_boot">Patch boot</string>
+
+    <!-- Status Card Customization -->
+    <string name="kitsune_customize_status_card_title">Status Card Customization</string>
+    <string name="kitsune_customize_status_card_desc">Material 3 shapes, checkmark icon, decorations, and glow</string>
+    <string name="kitsune_status_card_shape_title">Card Shape</string>
+    <string name="kitsune_status_card_icon_title">Status Icon / Checkmark</string>
+    <string name="kitsune_status_card_deco_title">Material 3 Shapes &amp; Decorations</string>
+    <string name="kitsune_shape_hero">Hero Expressive (Default M3)</string>
+    <string name="kitsune_shape_squircle">Squircle</string>
+    <string name="kitsune_shape_cut_corner">Cut Corners (Cyberpunk)</string>
+    <string name="kitsune_shape_pill">Pill Capsule</string>
+    <string name="kitsune_shape_asymmetric">Asymmetric (Expressive)</string>
+    <string name="kitsune_icon_check_circle">Checkmark in Circle (CheckCircle)</string>
+    <string name="kitsune_icon_verified">Verified Star (Verified)</string>
+    <string name="kitsune_icon_shield">Security Shield (Security)</string>
+    <string name="kitsune_icon_kitsune">Kitsune Fox (Fox)</string>
+    <string name="kitsune_icon_star">M3 Sparkles (Sparkle)</string>
+    <string name="kitsune_icon_none">No Icon</string>
+    <string name="kitsune_deco_m3_shapes">Material 3 Shapes (Pill &amp; Gems)</string>
+    <string name="kitsune_deco_sparkles">M3 Stars &amp; Sparkles</string>
+    <string name="kitsune_deco_rings">Pulsing Rings</string>
+    <string name="kitsune_deco_polygons">Floating Polygons</string>
+    <string name="kitsune_deco_minimal">Minimalist (No extra shapes)</string>
+    <string name="kitsune_show_badge_title">Show Status Badge</string>
+    <string name="kitsune_show_badge_desc">Displays a stylish badge next to \'Working\'</string>
+    <string name="kitsune_badge_text_label">Badge Text</string>
+    <string name="kitsune_glow_title">Neon Glow &amp; Border</string>
+    <string name="kitsune_glow_desc">Adds an expressive border with subtle glow effect</string>
+    <string name="kitsune_preview">Preview</string>
 </resources>
