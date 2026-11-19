@@ -89,3 +89,4 @@ cd KitsuneSU/manager
 
 ## 📜 Лицензия
 KitsuneSU распространяется под лицензией [GPL-3.0 or later](LICENSE).
+
